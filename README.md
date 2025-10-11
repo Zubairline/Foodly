@@ -1,6 +1,5 @@
 # Foodly
 An Engaging and enthusiastic food app
-# LearnX App
 
 ## Vision
 A mobile platform for learners and admins to access and manage educational programs.
