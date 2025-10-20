@@ -14,6 +14,7 @@ class Foodly extends StatelessWidget {
       onGenerateRoute: RouteGenerator.generateRoute,
       initialRoute: RouteGenerator.signIn,
       theme: ThemeData(
+        useMaterial3: true,
         scaffoldBackgroundColor: background,
         appBarTheme: AppBarTheme(
           backgroundColor: background,

@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:foodly_backup/features/auth/sign_in/screen/sign_in.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,7 +27,6 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF6F3),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -37,8 +37,11 @@ class _ProfileState extends State<Profile> {
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back,
-                        color: Color(0xFFEB7A50), size: 28),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Color(0xFFEB7A50),
+                      size: 28,
+                    ),
                     onPressed: () => Navigator.pop(context),
                   ),
                   const Expanded(
@@ -66,8 +69,8 @@ class _ProfileState extends State<Profile> {
                     backgroundColor: const Color(0xFFEADCD3),
                     backgroundImage: _profileImage != null
                         ? FileImage(_profileImage!)
-                        : const AssetImage('lib/assets/images/logo.png')
-                            as ImageProvider,
+                        : const AssetImage('assets/icons/png/Default.png')
+                              as ImageProvider,
                   ),
                   GestureDetector(
                     onTap: _pickImage,
@@ -77,8 +80,11 @@ class _ProfileState extends State<Profile> {
                         color: Color(0xFFEB7A50),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.edit,
-                          color: Colors.white, size: 18),
+                      child: const Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                        size: 18,
+                      ),
                     ),
                   ),
                 ],
@@ -88,17 +94,16 @@ class _ProfileState extends State<Profile> {
               // 👩 Name
               const Text(
                 'Sarah Doe',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 25),
 
               // 📊 Stats
               Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 15,
+                  horizontal: 10,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -119,10 +124,7 @@ class _ProfileState extends State<Profile> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Content Sections',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
               const SizedBox(height: 15),
@@ -147,10 +149,7 @@ class _ProfileState extends State<Profile> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'More Options',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
               const SizedBox(height: 15),
@@ -178,22 +177,23 @@ class _ProfileState extends State<Profile> {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignIn()),
+                      MaterialPageRoute(builder: (context) => const SignIn()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   icon: const Icon(Icons.logout, color: Colors.white),
                   label: const Text(
                     'LogOut',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ),
@@ -210,6 +210,7 @@ class _ProfileState extends State<Profile> {
 class _StatBox extends StatelessWidget {
   final String title;
   final int count;
+
   const _StatBox({required this.title, required this.count});
 
   @override
@@ -218,10 +219,7 @@ class _StatBox extends StatelessWidget {
       children: [
         Text(
           '$count',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         const SizedBox(height: 4),
         Text(

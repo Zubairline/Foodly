@@ -58,112 +58,71 @@ class _DiscoveryState extends State<Discovery> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            25.height,
-            // Search Bar
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Search recipes...',
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          25.height,
+          // Search Bar
+          TextField(
+            decoration: InputDecoration(
+              hintText: 'Search recipes...',
+              prefixIcon: Icon(Icons.search, color: Colors.grey),
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+          25.height,
+
+          // Category Chips
+          SizedBox(
+            height: 40,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: ChoiceChip(
+                  label: Text(categories[index]),
+                  selected: index == selectedCategoryIndex,
+                  onSelected: (selected) {
+                    if (selected) {
+                      setState(() {
+                        selectedCategoryIndex = index;
+                      });
+                    }
+                  },
+                  selectedColor: const Color(0xFFEF4136),
+                  backgroundColor: const Color(0xFFFFFAF8),
+                  labelStyle: const TextStyle(color: Colors.black),
                 ),
               ),
             ),
-            25.height,
-
-            // Category Chips
-            SizedBox(
-              height: 40,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: ChoiceChip(
-                    label: Text(categories[index]),
-                    selected: index == selectedCategoryIndex,
-                    onSelected: (selected) {
-                      if (selected) {
-                        setState(() {
-                          selectedCategoryIndex = index;
-                        });
-                      }
-                    },
-                    selectedColor: const Color(0xFFEF4136),
-                    backgroundColor: const Color(0xFFFFFAF8),
-                    labelStyle: const TextStyle(color: Colors.black),
+          ),
+          20.height,
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Horizontal Quick & Easy Recipes Section
+                  const Text(
+                    'Quick & Easy Recipes',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                ),
-              ),
-            ),
-            20.height,
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Horizontal Quick & Easy Recipes Section
-                    const Text(
-                      'Quick & Easy Recipes',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    SizedBox(
-                      height: 60,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: quickRecipes.length,
-                        itemBuilder: (context, index) {
-                          final recipe = quickRecipes[index];
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      RecipeDetailScreen(recipe: recipe),
-                                ),
-                              );
-                            },
-                            child: _buildRecipeCard(
-                              recipe['name']!,
-                              recipe['image']!,
-                              recipe['time']!,
-                              index,
-                              true,
-                            ), //Quick Recipe card generation
-                          );
-                        },
-                      ),
-                    ),
-                    24.height,
-
-                    // Main Recipe Grid
-                    GridView.builder(
-                      itemCount: recipes.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 12,
-                            mainAxisSpacing: 12,
-                            childAspectRatio: 0.8,
-                          ),
+                  const SizedBox(height: 6),
+                  SizedBox(
+                    height: 60,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: quickRecipes.length,
                       itemBuilder: (context, index) {
-                        final recipe = recipes[index];
+                        final recipe = quickRecipes[index];
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -174,102 +133,136 @@ class _DiscoveryState extends State<Discovery> {
                               ),
                             );
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              //Box configuration
-                              color: const Color(0xFFFFFAF8),
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: Colors.black, width: 1),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Image fills top section
-                                Expanded(
-                                  child: ClipRRect(
-                                    borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(16),
-                                    ),
-                                    child: Image.asset(
-                                      recipe['image']!,
-                                      fit: BoxFit.cover,
-                                      width: double.infinity,
-                                    ),
-                                  ),
-                                ),
-
-                                // Text + favorite icon (fixed height)
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          recipe['name']!,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14,
-                                            color: Colors.black,
-                                          ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      8.width,
-                                      IconButton(
-                                        icon: Icon(
-                                          isFavorited[index]
-                                              ? Icons.favorite
-                                              : Icons.favorite_border,
-                                          color: isFavorited[index]
-                                              ? const Color.fromARGB(
-                                                  255,
-                                                  233,
-                                                  22,
-                                                  149,
-                                                )
-                                              : Colors.black,
-                                          size: 20,
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            isFavorited[index] =
-                                                !isFavorited[index];
-                                          });
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                                // Recipe time (fixed height)
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0,
-                                    vertical: 4,
-                                  ),
-                                  child: Text(
-                                    recipe['time']!,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: _buildRecipeCard(
+                            recipe['name']!,
+                            recipe['image']!,
+                            recipe['time']!,
+                            index,
+                            true,
+                          ), //Quick Recipe card generation
                         );
                       },
                     ),
-                  ],
-                ),
+                  ),
+                  24.height,
+
+                  // Main Recipe Grid
+                  GridView.builder(
+                    itemCount: recipes.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      childAspectRatio: 0.8,
+                    ),
+                    itemBuilder: (context, index) {
+                      final recipe = recipes[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  RecipeDetailScreen(recipe: recipe),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            //Box configuration
+                            color: const Color(0xFFFFFAF8),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: Colors.black, width: 1),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Image fills top section
+                              Expanded(
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(16),
+                                  ),
+                                  child: Image.asset(
+                                    recipe['image']!,
+                                    fit: BoxFit.cover,
+                                    width: double.infinity,
+                                  ),
+                                ),
+                              ),
+
+                              // Text + favorite icon (fixed height)
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        recipe['name']!,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                          color: Colors.black,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    8.width,
+                                    IconButton(
+                                      icon: Icon(
+                                        isFavorited[index]
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
+                                        color: isFavorited[index]
+                                            ? const Color.fromARGB(
+                                                255,
+                                                233,
+                                                22,
+                                                149,
+                                              )
+                                            : Colors.black,
+                                        size: 20,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          isFavorited[index] =
+                                              !isFavorited[index];
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              // Recipe time (fixed height)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
+                                  vertical: 4,
+                                ),
+                                child: Text(
+                                  recipe['time']!,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

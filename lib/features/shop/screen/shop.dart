@@ -56,8 +56,7 @@ class _ShopState extends State<Shop> {
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
     String formattedTime = DateFormat('MMMM').format(now);
-    return Scaffold(
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,7 +161,6 @@ class _ShopState extends State<Shop> {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }

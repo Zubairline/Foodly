@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:foodly_backup/core/colors.dart';
 import 'package:foodly_backup/core/icons.dart';
+import 'package:foodly_backup/core/routes.dart';
 import 'package:foodly_backup/core/themes.dart';
 import 'package:foodly_backup/features/cook_book/screen/cook_book.dart';
 import 'package:foodly_backup/features/discovery/screen/discovery.dart';
@@ -30,7 +31,12 @@ class _CustomNavBarState extends State<CustomNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CircleAvatar(),
+        leading: GestureDetector(
+          onTap: () => Navigator.pushNamed(context, RouteGenerator.profile),
+          child: CircleAvatar(
+            child: Image.asset('assets/icons/png/Default.png'),
+          ),
+        ),
         title: Text('Hello, Sarah'),
         actions: [
           IconButton(
