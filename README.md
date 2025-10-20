@@ -43,6 +43,10 @@ Users can:
 - Version Control: Git + GitHub
 
 ---
+### Demo Video Walkthrough
+A short 2–3 minute screen recording demonstrating the app flow (Login → Home → Listing → Details).
+
+**Watch the demo:** [https://drive.google.com/your-video-link](https://drive.google.com/file/d/1ZKkZomZFOkujC87W5EK4SFe7wF4oyiVW/view?usp=drive_link)
 
 ## How to Run the Project
 
