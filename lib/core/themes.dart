@@ -20,6 +20,6 @@ final TextStyle buttons = GoogleFonts.poppins(
   color: Colors.white,
 );
 final TextStyle navigationBar = GoogleFonts.poppins(
-  fontSize: 7,
+  fontSize: 10,
   color: Color(0xff737373),
 );
