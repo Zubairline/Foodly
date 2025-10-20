@@ -12,7 +12,7 @@ class Foodly extends StatelessWidget {
       title: 'Foodly',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: RouteGenerator.initialRoute,
+      initialRoute: RouteGenerator.signIn,
       theme: ThemeData(
         scaffoldBackgroundColor: background,
         appBarTheme: AppBarTheme(

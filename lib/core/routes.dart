@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodly_backup/config/widgets/navigation_decider.dart';
+import 'package:foodly_backup/features/auth/forgot_password/screen/forgot_password.dart';
+import 'package:foodly_backup/features/auth/sign_in/screen/sign_in.dart';
+import 'package:foodly_backup/features/auth/sign_up/screen/signup.dart';
 import 'package:foodly_backup/features/profile/screens/profile.dart';
 
 class RouteGenerator {
@@ -18,6 +21,12 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
+      case signIn:
+        return MaterialPageRoute(builder: (context) => SignIn());
+      case signUp:
+        return MaterialPageRoute(builder: (context) => SignUp());
+        case forgotPassword:
+        return MaterialPageRoute(builder: (context) => ForgotPassword());
       case profile:
         return MaterialPageRoute(builder: (context) => Profile());
       case initialRoute:
