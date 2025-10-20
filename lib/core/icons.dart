@@ -1,0 +1,9 @@
+const String add = 'assets/icons/png/add.png';
+const String calendar = 'assets/icons/png/Calendar.png';
+const String cookBook = 'assets/icons/png/Cookbook.png';
+const String home = 'assets/icons/png/Home.png';
+const String logOut = 'assets/icons/png/Logout.png';
+const String search = 'assets/icons/png/search.png';
+const String settings = 'assets/icons/png/settings.png';
+const String shop = 'assets/icons/png/Shop.png';
+const String trash = 'assets/icons/png/Trash.png';
