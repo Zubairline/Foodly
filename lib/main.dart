@@ -29,7 +29,8 @@ class FoodlyApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignupScreen(),
-        '/profile': (context) => const ProfileScreen(),
+        '/profile': (context) =>
+            const ProfileScreen(userEmail: 'default@example.com'),
         '/forgot-password': (context) => const ForgotPasswordPage(),
       },
     );

@@ -4,7 +4,9 @@ import 'package:image_picker/image_picker.dart';
 import 'login.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final String userEmail;
+
+  const ProfileScreen({super.key, required this.userEmail});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -37,8 +39,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back,
-                        color: Color(0xFFEB7A50), size: 28),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Color(0xFFEB7A50),
+                      size: 28,
+                    ),
                     onPressed: () => Navigator.pop(context),
                   ),
                   const Expanded(
@@ -67,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     backgroundImage: _profileImage != null
                         ? FileImage(_profileImage!)
                         : const AssetImage('lib/assets/images/logo.png')
-                            as ImageProvider,
+                              as ImageProvider,
                   ),
                   GestureDetector(
                     onTap: _pickImage,
@@ -77,8 +82,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         color: Color(0xFFEB7A50),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.edit,
-                          color: Colors.white, size: 18),
+                      child: const Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                        size: 18,
+                      ),
                     ),
                   ),
                 ],
@@ -86,19 +94,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: 15),
 
               // 👩 Name
-              const Text(
-                'Sarah Doe',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+              Text(
+                widget.userEmail.split('@')[0],
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 25),
 
               // 📊 Stats
               Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 15,
+                  horizontal: 10,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -119,10 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Content Sections',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
               const SizedBox(height: 15),
@@ -147,10 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'More Options',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
               const SizedBox(height: 15),
@@ -179,21 +180,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LoginScreen()),
+                        builder: (context) => const LoginScreen(),
+                      ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   icon: const Icon(Icons.logout, color: Colors.white),
                   label: const Text(
                     'LogOut',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ),
@@ -218,10 +222,7 @@ class _StatBox extends StatelessWidget {
       children: [
         Text(
           '$count',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         const SizedBox(height: 4),
         Text(
