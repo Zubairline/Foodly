@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "title": "Healthy Breakfast Tips",
+    "category": "Breakfast",
+    "estimatedTime": "5 min",
+    "description": "Learn quick and nutritious breakfast ideas to start your day right.",
+    "content": [
+      "Breakfast is the most important meal of the day.",
+      "Focus on including a balance of protein, healthy fats, and complex carbohydrates.",
+      "Some easy options include overnight oats with fruits, Greek yogurt with nuts, or avocado toast.",
+      "Try to avoid sugary cereals and processed foods.",
+      "Drinking water or herbal tea is also a great way to hydrate after waking up."
+    ],
+    "youtubeUrl": ""
+  },
+  {
+    "id": 2,
+    "title": "Understanding Basic Macro Nutrients",
+    "category": "Nutrition",
+    "estimatedTime": "7 min",
+    "description": "An introduction to proteins, carbohydrates, and fats, and their role in your diet.",
+    "content": [
+      "Macronutrients are nutrients that provide energy and are needed in large amounts.",
+      "Proteins help build and repair tissues and are found in meat, eggs, beans, and nuts.",
+      "Carbohydrates are your body's main energy source, found in grains, fruits, and vegetables.",
+      "Fats are essential for energy, hormone production, and cell function, with healthy sources including avocados, nuts, and olive oil.",
+      "Understanding macros helps you make balanced dietary choices."
+    ],
+    "youtubeUrl": "https://www.youtube.com/watch?v=smPR215SRzM"
+  },
+  {
+    "id": 3,
+    "title": "Smart Snacking Habits",
+    "category": "Snacks",
+    "estimatedTime": "4 min",
+    "description": "Tips for choosing healthy snacks that keep your energy levels stable.",
+    "content": [
+      "Snacking can help prevent overeating at meals if done wisely.",
+      "Choose snacks high in protein and fiber, like nuts, yogurt, or fruit.",
+      "Avoid processed snacks with added sugar or unhealthy fats.",
+      "Keep portion sizes small and aim for variety throughout the day.",
+      "Hydrate with water or herbal teas instead of sugary drinks."
+    ],
+    "youtubeUrl": ""
+  },
+  {
+    "id": 4,
+    "title": "Balanced Lunch Ideas",
+    "category": "Lunch",
+    "estimatedTime": "6 min",
+    "description": "Learn how to create a nutritious and filling lunch that powers your afternoon.",
+    "content": [
+      "A balanced lunch should include a lean protein, complex carbohydrates, and plenty of vegetables.",
+      "Examples include grilled chicken salad, quinoa with roasted vegetables, or a turkey and avocado wrap.",
+      "Incorporate healthy fats such as olive oil or nuts to keep you full longer.",
+      "Avoid skipping lunch or relying on fast food, which can lead to energy crashes.",
+      "Meal prepping can make healthy lunches quick and easy during the week."
+    ],
+    "youtubeUrl": "https://www.youtube.com/watch?v=9h9S9kD67-Q"
+  },
+  {
+    "id": 5,
+    "title": "Hydration and Healthy Beverages",
+    "category": "Hydration",
+    "estimatedTime": "3 min",
+    "description": "Discover the importance of hydration and the best drinks for your health.",
+    "content": [
+      "Staying hydrated is essential for energy, digestion, and overall health.",
+      "Water should be your primary drink throughout the day.",
+      "Herbal teas and infused water with fruits or herbs are great alternatives.",
+      "Limit sugary drinks, sodas, and excessive caffeine.",
+      "Tracking your water intake can help ensure you stay properly hydrated."
+    ],
+    "youtubeUrl": "https://www.youtube.com/watch?v=P8c9DIiAFz8"
+  }
+]
