@@ -15,7 +15,7 @@ class RouteGenerator {
   static const String discovery = '/discovery';
   static const String shop = '/shop';
   static const String plan = '/plan';
-  static const String cookBook = '/cookbook';
+  static const String courses = '/courses';
   static const String setting = '/settings';
   static const String signIn = '/signIn';
   static const String signUp = '/signUp';

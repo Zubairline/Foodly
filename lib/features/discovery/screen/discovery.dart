@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:foodly_backup/config/utils/images.dart';
+import 'package:flutter/services.dart';
 import 'package:foodly_backup/features/discovery/widget/recipe_detail.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -18,31 +20,28 @@ class _DiscoveryState extends State<Discovery> {
     'Desserts',
     'Quick Meals',
   ]; //Category List
-  static const List<Map<String, String>> recipes = [
-    {
-      'name': 'Grilled Chicken Salad',
-      'image': grilledChickenSalad,
-      'time': '15 min',
-    },
-    {'name': 'Vegan Bowl', 'image': saladBowl, 'time': '10 min'},
-    {'name': 'Pasta Alfredo', 'image': pastaAlfredo, 'time': '25 min'},
-  ]; //Recipe: <name, image, time>
-
-  static const List<Map<String, String>> quickRecipes = [
-    {'name': 'Avocado Toast', 'image': avocadoToast, 'time': '5 min'},
-    {'name': 'Smoothie', 'image': smoothies, 'time': '3 min'},
-    {'name': 'Omelette', 'image': omelettes, 'time': '7 min'},
-  ];
+  late List<dynamic>recipes=[];
+  late List<dynamic>quickRecipes=[];
 
   int selectedCategoryIndex = 0;
   late List<bool> isFavorite;
   late List<bool> quickIsFavorite;
 
+  Future<void> _loadRecipes() async {
+    final String response = await rootBundle.loadString('assets/json/foods.json');
+    final data = await json.decode(response);
+    setState(() {
+      recipes= data['popularFoods'];
+      quickRecipes = data['quickHealthyFoods'];
+      isFavorite = List.filled(recipes.length, false);
+      quickIsFavorite = List.filled(quickRecipes.length, false);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    isFavorite = List.filled(recipes.length, false);
-    quickIsFavorite = List.filled(quickRecipes.length, false);
+    _loadRecipes();
   }
 
   @override

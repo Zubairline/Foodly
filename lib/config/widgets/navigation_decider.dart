@@ -1,11 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:foodly_backup/features/courses/screen/courses.dart';
 import 'package:foodly_backup/config/utils/colors.dart';
 import 'package:foodly_backup/config/utils/icons.dart';
 import 'package:foodly_backup/config/utils/images.dart';
 import 'package:foodly_backup/config/utils/routes.dart';
 import 'package:foodly_backup/config/utils/themes.dart';
+import 'package:foodly_backup/features/courses/screen/courses.dart';
 import 'package:foodly_backup/features/discovery/screen/discovery.dart';
 import 'package:foodly_backup/features/plan/screen/plan.dart';
 import 'package:foodly_backup/features/shop/screen/shop.dart';
@@ -19,6 +20,7 @@ class CustomNavBar extends StatefulWidget {
 }
 
 class _CustomNavBarState extends State<CustomNavBar> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
   int _selectedIndex = 0;
   final List<Widget> _pages = [Discovery(), Plan(), Shop(), CoursesScreen()];
 
@@ -26,6 +28,13 @@ class _CustomNavBarState extends State<CustomNavBar> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  Future<String> _greeting() async {
+    final prefs = await SharedPreferences.getInstance();
+    final firstName = prefs.getString('first_name');
+    debugPrint(firstName);
+    return 'Hello, $firstName';
   }
 
   @override
@@ -39,7 +48,17 @@ class _CustomNavBarState extends State<CustomNavBar> {
             child: CircleAvatar(backgroundImage: AssetImage(profile)),
           ),
         ),
-        title: Text('Hello, Sarah'),
+        title: FutureBuilder(
+          future: _greeting(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text('Hello, ...');
+            } else if (snapshot.hasError) {
+              return Text('Hey there 👋');
+            }
+            return Text(snapshot.data!);
+          },
+        ),
         actions: [
           IconButton(
             onPressed: () => Text("You've tapped on the settings icon"),
@@ -75,7 +94,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
               _buildNavItem(calendarSvg, 'Plan', 1),
               40.width,
               _buildNavItem(shopSvg, 'Shop', 2),
-              _buildNavItem(cookBookSvg, 'CookBook', 3),
+              _buildNavItem(coursesSvg, 'Courses', 3),
             ],
           ),
         ),
@@ -85,7 +104,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
         backgroundColor: background,
         onPressed: () {},
         shape: CircleBorder(),
-        child: SvgPicture.asset('assets/logo/svg/Logo.svg'),
+        child: Image.asset('assets/logo/png/Logo.png'),
       ),
     );
   }

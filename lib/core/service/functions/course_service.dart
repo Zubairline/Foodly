@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:foodly_backup/services/models/course.dart';
+import 'package:foodly_backup/features/courses/models/course_model.dart';
 
 class CourseService {
   static Future<List<Course>> loadCourses() async {
-    final String response = await rootBundle.loadString('assets/foodly_lessons.json');
+    final String response = await rootBundle.loadString('assets/json/courses.json');
     final List<dynamic> data = json.decode(response);
 
-    final String ratingsResponse = await rootBundle.loadString('assets/ratings.csv');
+    final String ratingsResponse = await rootBundle.loadString('assets/csv/ratings.csv');
     final List<String> ratingsLines = ratingsResponse.split('\n').where((line) => line.isNotEmpty).toList();
     final Map<int, List<int>> ratingsMap = {};
 
