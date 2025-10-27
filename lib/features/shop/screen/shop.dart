@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodly_backup/core/colors.dart';
-import 'package:foodly_backup/core/themes.dart';
+import 'package:foodly_backup/config/utils/colors.dart';
+import 'package:foodly_backup/config/utils/themes.dart';
 import 'package:foodly_backup/features/shop/widgets/number_badge.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';

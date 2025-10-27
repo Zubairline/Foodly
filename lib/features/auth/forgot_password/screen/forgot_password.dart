@@ -1,9 +1,10 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
-import 'package:foodly_backup/config/widgets/custom_textfield.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodly_backup/config/utils/colors.dart';
+import 'package:foodly_backup/config/widgets/input_field.dart';
+import 'package:foodly_backup/core/helper.dart';
+import 'package:foodly_backup/features/auth/forgot_password/managers/forgot_password_bloc.dart';
+import 'package:foodly_backup/features/auth/forgot_password/managers/forgot_password_state.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -14,97 +15,104 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final emailController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   bool _isLoading = false;
-
-  Future<void> _resetPassword() async {
-    final email = emailController.text.trim();
-    if (email.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter your email address.')),
-      );
-      return;
-    }
-
-    setState(() {
-      _isLoading = true;
-    });
-
-    try {
-      final response = await http.post(
-        Uri.parse('https://api.example.com/forgot-password'), // Replace with actual backend URL
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'email': email}),
-      );
-
-      if (response.statusCode == 200) {
-        if(mounted){
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text('Password reset email sent. Check your inbox.')),
-          );
-          Navigator.pop(context);
-        } // Optionally navigate back
-      } else {
-        if(mounted){
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error: ${response.body}')),
-          );
-        }
-      }
-    } catch (e) {
-      if(mounted){
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Network error: $e')),
-        );
-      }
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Forgot Password'),),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("Forgot Password?",
-                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                const Text("Enter your email to reset your password.",
-                    style: TextStyle(color: Colors.grey)),
-                const SizedBox(height: 30),
-                CustomTextField(label: "Email Address", controller: emailController),
-                const SizedBox(height: 25),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _isLoading ? null : _resetPassword,
-                    child: _isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text("Reset Password"),
+    return BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
+      builder: (context, state) => Scaffold(
+        appBar: AppBar(title: Text('Forgot Password')),
+        body: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Forgot Password?",
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
-                ),
-                const SizedBox(height: 20),
-                Align(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text("Back to Sign In"),
+                  const SizedBox(height: 8),
+                  const Text(
+                    "Enter your email to reset your password.",
+                    style: TextStyle(color: Colors.grey),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 30),
+
+                  Form(
+                    key: formKey,
+                    child: InputField(
+                      hintText: 'Email',
+                      prefixIcon: Icon(Icons.email_outlined),
+                      controller: emailController,
+                      filled: false,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email';
+                        } else if (!Helper().validateEmail(value)) {
+                          return 'Please enter a valid email';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: navigationButton,
+                      ),
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          Future.delayed(const Duration(seconds: 2), () {});
+                        }
+                      },
+                      child: _isLoading
+                          ? const CircularProgressIndicator()
+                          : const Text(
+                              "Reset Password",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Align(
+                    alignment: Alignment.center,
+                    child: TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        "Back to Sign In",
+                        style: TextStyle(color: navigationButton),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
+      listener: (BuildContext context, state) {
+        if (state is SuccessState) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+        if (state is ErrorState) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+        if (state is LoadingState) {
+          const CircularProgressIndicator();
+        }
+      },
     );
   }
 }

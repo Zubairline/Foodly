@@ -43,7 +43,7 @@ class RecipeDetailScreen extends StatelessWidget {
               // Main recipe content text formatting
               const Text(
                 'Ingredients:\n\n- Ingredient 1\n- Ingredient 2\n- Ingredient 3\n- Ingredient 4\n\n Nutritional Info: \n\n Calories: XX\n\n Fat:XX\n    Unsaturated Fats:XX\n    Saturated Fats:XX\n    Trans Fats:XX\n\n Carbohydrates:XX\n    Dietery Fiber:XX\n    Sugars:XX\n\n Protein:XX\n Salt:XX\n\n Instructions:\n\n RECIPE INFO INSERTED HERE \n\n',
-                style: const TextStyle(fontSize: 16, height: 1.5),
+                style: TextStyle(fontSize: 16, height: 1.5),
               ),
             ],
           ),

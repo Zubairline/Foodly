@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:foodly_backup/core/colors.dart';
-import 'package:foodly_backup/core/icons.dart';
-import 'package:foodly_backup/core/routes.dart';
-import 'package:foodly_backup/core/themes.dart';
+import 'package:foodly_backup/config/utils/colors.dart';
+import 'package:foodly_backup/config/utils/icons.dart';
+import 'package:foodly_backup/config/utils/images.dart';
+import 'package:foodly_backup/config/utils/routes.dart';
+import 'package:foodly_backup/config/utils/themes.dart';
 import 'package:foodly_backup/features/cook_book/screen/cook_book.dart';
 import 'package:foodly_backup/features/discovery/screen/discovery.dart';
 import 'package:foodly_backup/features/plan/screen/plan.dart';
@@ -31,10 +32,11 @@ class _CustomNavBarState extends State<CustomNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () => Navigator.pushNamed(context, RouteGenerator.profile),
-          child: CircleAvatar(
-            child: Image.asset('assets/icons/png/Default.png'),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20.0),
+          child: GestureDetector(
+            onTap: () => Navigator.pushNamed(context, RouteGenerator.profile),
+            child: CircleAvatar(backgroundImage: AssetImage(profile)),
           ),
         ),
         title: Text('Hello, Sarah'),
@@ -44,7 +46,15 @@ class _CustomNavBarState extends State<CustomNavBar> {
             icon: SvgPicture.asset(settingsSvg, width: 22, height: 22),
           ),
           IconButton(
-            onPressed: () => Text("You've tapped on the Logout icon"),
+            onPressed: () {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text("See you soon!")));
+              Navigator.restorablePushReplacementNamed(
+                context,
+                RouteGenerator.signIn,
+              );
+            },
             icon: SvgPicture.asset(logout, width: 22, height: 22),
           ),
         ],

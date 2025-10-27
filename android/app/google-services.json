@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "498031515155",
+    "project_id": "foodly-baffoe-app",
+    "storage_bucket": "foodly-baffoe-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498031515155:android:a1768d8741debba66351e6",
+        "android_client_info": {
+          "package_name": "com.example.foodly_backup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu4nfF3r4jHzx_o7hqPS4ZX49z7Voha-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:foodly_backup/config/utils/images.dart';
 import 'package:foodly_backup/features/auth/sign_in/screen/sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -69,7 +70,7 @@ class _ProfileState extends State<Profile> {
                     backgroundColor: const Color(0xFFEADCD3),
                     backgroundImage: _profileImage != null
                         ? FileImage(_profileImage!)
-                        : const AssetImage('assets/icons/png/Default.png')
+                        : const AssetImage(profile)
                               as ImageProvider,
                   ),
                   GestureDetector(

@@ -1,7 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodly_backup/config/widgets/navigation_decider.dart';
+import 'package:foodly_backup/features/auth/forgot_password/managers/forgot_password_bloc.dart';
 import 'package:foodly_backup/features/auth/forgot_password/screen/forgot_password.dart';
+import 'package:foodly_backup/features/auth/sign_in/managers/sign_in_bloc.dart';
 import 'package:foodly_backup/features/auth/sign_in/screen/sign_in.dart';
+import 'package:foodly_backup/features/auth/sign_up/managers/sign_up_bloc.dart';
 import 'package:foodly_backup/features/auth/sign_up/screen/signup.dart';
 import 'package:foodly_backup/features/profile/screens/profile.dart';
 
@@ -19,14 +24,30 @@ class RouteGenerator {
   static const String initialRoute = '/initialRoute';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
     final args = settings.arguments;
     switch (settings.name) {
       case signIn:
-        return MaterialPageRoute(builder: (context) => SignIn());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => SignInBloc(auth),
+            child: SignIn(),
+          ),
+        );
       case signUp:
-        return MaterialPageRoute(builder: (context) => SignUp());
-        case forgotPassword:
-        return MaterialPageRoute(builder: (context) => ForgotPassword());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => SignUpBloc(auth),
+            child: SignUp(),
+          ),
+        );
+      case forgotPassword:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => ForgotPasswordBloc(auth),
+            child: ForgotPassword(),
+          ),
+        );
       case profile:
         return MaterialPageRoute(builder: (context) => Profile());
       case initialRoute:

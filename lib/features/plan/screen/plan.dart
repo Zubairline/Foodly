@@ -57,7 +57,7 @@ class _PlanState extends State<Plan> {
                         border: Border.all(color: Colors.grey.shade300),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
+                            color: Colors.grey.withValues(alpha: 0.1),
                             blurRadius: 4,
                             offset: const Offset(0, 2),
                           ),
@@ -139,7 +139,7 @@ class _PlanState extends State<Plan> {
                                   ],
                                 ),
                               );
-                            }).toList(),
+                            }),
                         ],
                       ),
                     ),

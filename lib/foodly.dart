@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:foodly_backup/core/colors.dart';
-import 'package:foodly_backup/core/routes.dart';
+import 'package:foodly_backup/config/utils/colors.dart';
+import 'package:foodly_backup/config/utils/routes.dart';
 
 class Foodly extends StatelessWidget {
   const Foodly({super.key});
@@ -16,6 +16,7 @@ class Foodly extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: background,
+        colorScheme: ColorScheme.fromSeed(seedColor: background),
         appBarTheme: AppBarTheme(
           backgroundColor: background,
           actionsIconTheme: IconThemeData(size: 20),
