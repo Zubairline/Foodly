@@ -11,7 +11,7 @@ const String trash = 'assets/icons/png/Trash.png';
 
 // Svg Formatted Icons
 const String calendarSvg = 'assets/icons/svg/Calendar.svg';
-const String cookBookSvg = 'assets/icons/svg/Cookbook.svg';
+const String coursesSvg = 'assets/icons/svg/Cookbook.svg';
 const String homeSvg = 'assets/icons/svg/Home.svg';
 const String logout = 'assets/icons/svg/Logout.svg';
 const String settingsSvg = 'assets/icons/svg/settings.svg';

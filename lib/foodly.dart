@@ -20,6 +20,7 @@ class Foodly extends StatelessWidget {
         appBarTheme: AppBarTheme(
           backgroundColor: background,
           actionsIconTheme: IconThemeData(size: 20),
+          elevation: 2,
           toolbarHeight: 50,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodly_backup/services/models/course.dart';
+import 'package:foodly_backup/features/courses/models/course_model.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class CourseDetailScreen extends StatefulWidget {
@@ -17,7 +17,9 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   @override
   void initState() {
     super.initState();
-    final videoId = YoutubePlayerController.convertUrlToId(widget.course.youtubeUrl);
+    final videoId = YoutubePlayerController.convertUrlToId(
+      widget.course.youtubeUrl,
+    );
     if (videoId != null) {
       _controller = YoutubePlayerController.fromVideoId(
         videoId: videoId,
@@ -40,19 +42,14 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.course.title),
-      ),
+      appBar: AppBar(title: Text(widget.course.title)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (_controller != null)
-              YoutubePlayer(
-                controller: _controller!,
-                aspectRatio: 16 / 9,
-              ),
+              YoutubePlayer(controller: _controller!, aspectRatio: 16 / 9),
             if (_controller == null)
               Container(
                 height: 200,
@@ -64,18 +61,12 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
             const SizedBox(height: 16),
             Text(
               widget.course.title,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
               '${widget.course.category} • ${widget.course.estimatedTime}',
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
+              style: const TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 16),
             Text(
@@ -85,16 +76,15 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
             const SizedBox(height: 16),
             const Text(
               'Content:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            ...widget.course.content.map((item) => Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Text('• $item'),
-            )),
+            ...widget.course.content.map(
+              (item) => Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text('• $item'),
+              ),
+            ),
           ],
         ),
       ),
