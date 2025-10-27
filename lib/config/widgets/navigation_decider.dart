@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:foodly_backup/features/courses/screen/courses.dart';
 import 'package:foodly_backup/config/utils/colors.dart';
 import 'package:foodly_backup/config/utils/icons.dart';
 import 'package:foodly_backup/config/utils/images.dart';
 import 'package:foodly_backup/config/utils/routes.dart';
 import 'package:foodly_backup/config/utils/themes.dart';
-import 'package:foodly_backup/features/cook_book/screen/cook_book.dart';
 import 'package:foodly_backup/features/discovery/screen/discovery.dart';
 import 'package:foodly_backup/features/plan/screen/plan.dart';
 import 'package:foodly_backup/features/shop/screen/shop.dart';
@@ -20,7 +20,7 @@ class CustomNavBar extends StatefulWidget {
 
 class _CustomNavBarState extends State<CustomNavBar> {
   int _selectedIndex = 0;
-  final List<Widget> _pages = [Discovery(), Plan(), Shop(), CookBook()];
+  final List<Widget> _pages = [Discovery(), Plan(), Shop(), CoursesScreen()];
 
   void _onItemTapped(int index) {
     setState(() {
