@@ -1,13 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:foodly_backup/config/utils/colors.dart';
 import 'package:foodly_backup/config/utils/icons.dart';
 import 'package:foodly_backup/config/utils/images.dart';
 import 'package:foodly_backup/config/utils/routes.dart';
 import 'package:foodly_backup/config/utils/themes.dart';
+import 'package:foodly_backup/features/courses/managers/courses_bloc.dart';
 import 'package:foodly_backup/features/courses/screen/courses.dart';
+import 'package:foodly_backup/features/discovery/managers/discovery_bloc.dart';
 import 'package:foodly_backup/features/discovery/screen/discovery.dart';
+import 'package:foodly_backup/features/plan/managers/plan_bloc.dart';
 import 'package:foodly_backup/features/plan/screen/plan.dart';
 import 'package:foodly_backup/features/shop/screen/shop.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -22,7 +26,12 @@ class CustomNavBar extends StatefulWidget {
 class _CustomNavBarState extends State<CustomNavBar> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   int _selectedIndex = 0;
-  final List<Widget> _pages = [Discovery(), Plan(), Shop(), CoursesScreen()];
+  final List<Widget> _pages = [
+    BlocProvider(create: (context) => DiscoveryBloc(), child: Discovery()),
+    BlocProvider(create: (context) => PlanBloc(), child: Plan()),
+    Shop(),
+    BlocProvider(create: (context) => CoursesBloc(), child: CoursesScreen()),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -33,7 +42,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
   Future<String> _greeting() async {
     final prefs = await SharedPreferences.getInstance();
     final firstName = prefs.getString('first_name');
-    debugPrint(firstName);
     return 'Hello, $firstName';
   }
 

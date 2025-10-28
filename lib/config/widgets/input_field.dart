@@ -13,7 +13,7 @@ class InputField extends StatelessWidget {
     this.suffixIcon,
     this.border,
     this.prefixIcon,
-    this.filled,
+    this.filled, this.label,
   });
 
   final TextEditingController? controller;
@@ -26,6 +26,7 @@ class InputField extends StatelessWidget {
   final String? Function(String?)? validator;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,7 @@ class InputField extends StatelessWidget {
       textInputAction: textInputAction,
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
+        labelText: label,
         prefixIcon: prefixIcon,
         hintText: hintText,
         hintStyle: const TextStyle(color: textSecondaryColor),
