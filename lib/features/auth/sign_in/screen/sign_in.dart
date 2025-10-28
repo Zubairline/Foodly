@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodly_backup/config/utils/routes.dart';
 import 'package:foodly_backup/config/widgets/input_field.dart';
-import 'package:foodly_backup/core/helper.dart';
+import 'package:foodly_backup/core/helper/helper.dart';
 import 'package:foodly_backup/features/auth/sign_in/managers/sign_in_bloc.dart';
 import 'package:foodly_backup/features/auth/sign_in/managers/sign_in_event.dart';
 import 'package:foodly_backup/features/auth/sign_in/managers/sign_in_state.dart';
@@ -21,6 +21,7 @@ class _SignInState extends State<SignIn> {
   late final TextEditingController _passwordController;
   final Helper helper = Helper();
   bool isPasswordVisible = false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -34,11 +35,6 @@ class _SignInState extends State<SignIn> {
     return BlocConsumer<SignInBloc, SignInState>(
       listener: (BuildContext context, state) {
         if (state is SuccessState) {
-          _emailController.clear();
-          _passwordController.clear();
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('Welcome Back')));
           Navigator.pushReplacementNamed(context, RouteGenerator.initialRoute);
         } else if (state is ErrorState) {
           ScaffoldMessenger.of(
@@ -59,15 +55,10 @@ class _SignInState extends State<SignIn> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(height: 80),
-                  // 🌿 Logo
-                  Image.asset(
-                    'assets/logo/png/Logo.png',
-                    // Replace with your own logo image
-                    height: 80,
-                  ),
+
+                  Image.asset('assets/logo/png/Logo.png', height: 80),
                   const SizedBox(height: 30),
 
-                  // 🖋 Title
                   const Text(
                     'Welcome Back!',
                     style: TextStyle(
@@ -78,18 +69,16 @@ class _SignInState extends State<SignIn> {
                   ),
                   const SizedBox(height: 8),
 
-                  // 🗝 Subtitle
                   const Text(
                     'Sign in to Your Account',
                     style: TextStyle(color: Colors.black54, fontSize: 15),
                   ),
                   35.height,
-                  // 🔒 Password Field
+
                   Form(
                     key: _formKey,
                     child: Column(
                       children: [
-                        // 📧 Email Field
                         InputField(
                           controller: _emailController,
                           textInputType: TextInputType.emailAddress,
@@ -98,7 +87,7 @@ class _SignInState extends State<SignIn> {
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide.none,
                           ),
-                          hintText: 'Email',
+                          label: 'Email',
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your email address';
@@ -118,7 +107,20 @@ class _SignInState extends State<SignIn> {
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide.none,
                           ),
-                          hintText: 'Password',
+                          label: 'Password',
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              isPasswordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: const Color(0xFFEB7A50),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                isPasswordVisible = !isPasswordVisible;
+                              });
+                            },
+                          ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your password';
@@ -135,7 +137,6 @@ class _SignInState extends State<SignIn> {
                   ),
                   12.height,
 
-                  // ❓ Forgot Password
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -154,7 +155,6 @@ class _SignInState extends State<SignIn> {
                   ),
                   15.height,
 
-                  // 🔘 Sign Up Button
                   SizedBox(
                     width: double.infinity,
                     height: 55,
@@ -167,6 +167,11 @@ class _SignInState extends State<SignIn> {
                               _passwordController.text.trim(),
                             ),
                           );
+                          _emailController.clear();
+                          _passwordController.clear();
+                          setState(() {
+                            isLoading = !isLoading;
+                          });
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -176,19 +181,20 @@ class _SignInState extends State<SignIn> {
                         ),
                         elevation: 3,
                       ),
-                      child: const Text(
-                        'Sign In',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
-                      ),
+                      child: isLoading
+                          ? CircularProgressIndicator(color: Colors.white,)
+                          : const Text(
+                              'Sign In',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                            ),
                     ),
                   ),
                   25.height,
 
-                  // 🧭 Sign Up Link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

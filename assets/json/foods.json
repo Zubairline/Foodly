@@ -3,149 +3,178 @@
     {
       "name": "Grilled Chicken Salad",
       "image": "assets/images/grilled_chicken_salad.jpeg",
-      "time": "15 mins"
+      "time": "15 mins",
+      "category": "dinner"
     },
     {
       "name": "Vegan Bowl",
       "image": "assets/images/salad_bowl.jpeg",
-      "time": "10 mins"
+      "time": "10 mins",
+      "category": "vegan"
     },
     {
       "name": "Pasta Alfredo",
       "image": "assets/images/pasta_alfredo.jpeg",
-      "time": "25 mins"
+      "time": "25 mins",
+      "category": "dinner"
     },
     {
       "name": "Beef Burger",
       "image": "assets/images/beef_burger.jpg",
-      "time": "20 mins"
+      "time": "20 mins",
+      "category": "dinner"
     },
     {
       "name": "Chicken Fried Rice",
       "image": "assets/images/chicken_fried_rice.jpg",
-      "time": "30 mins"
+      "time": "30 mins",
+      "category": "dinner"
     },
     {
       "name": "Chicken Caesar Wrap",
       "image": "assets/images/chicken_caesar_wrap.jpg",
-      "time": "12 mins"
+      "time": "12 mins",
+      "category": "quickMeals"
     },
     {
       "name": "Margherita Pizza",
       "image": "assets/images/margherita_pizza.jpg",
-      "time": "25 mins"
+      "time": "25 mins",
+      "category": "dinner"
     },
     {
       "name": "Shrimp Tacos",
       "image": "assets/images/shrimp_tacos.jpg",
-      "time": "20 mins"
+      "time": "20 mins",
+      "category": "dinner"
     },
     {
       "name": "Steak with Veggies",
       "image": "assets/images/steak_with_veggies.png",
-      "time": "35 mins"
+      "time": "35 mins",
+      "category": "dinner"
     },
     {
       "name": "Pancakes",
       "image": "assets/images/pancakes.png",
-      "time": "15 mins"
+      "time": "15 mins",
+      "category": "desserts"
     },
     {
       "name": "Sushi Roll",
       "image": "assets/images/sushi_roll.png",
-      "time": "40 mins"
+      "time": "40 mins",
+      "category": "dinner"
     },
     {
       "name": "Tomato Soup",
       "image": "assets/images/tomato_soup.jpg",
-      "time": "18 mins"
+      "time": "18 mins",
+      "category": "vegan"
     },
     {
       "name": "Caesar Salad",
       "image": "assets/images/caesar_salad.png",
-      "time": "12 mins"
+      "time": "12 mins",
+      "category": "vegan"
     },
     {
       "name": "Grilled Salmon",
       "image": "assets/images/grilled_salmon.jpg",
-      "time": "22 mins"
+      "time": "22 mins",
+      "category": "dinner"
     }
   ],
   "quickHealthyFoods": [
     {
       "name": "Avocado Toast",
       "image": "assets/images/avocado_toast.jpeg",
-      "time": "5 min"
+      "time": "5 min",
+      "category": "quickMeals"
     },
     {
       "name": "Smoothie",
       "image": "assets/images/smoothies.jpeg",
-      "time": "3 min"
+      "time": "3 min",
+      "category": "quickMeals"
     },
     {
       "name": "Omelette",
       "image": "assets/images/omelettes.jpeg",
-      "time": "7 min"
+      "time": "7 min",
+      "category": "quickMeals"
     },
     {
       "name": "Tuna Salad Wrap",
       "image": "assets/images/tuna_salad_wrap.jpeg",
-      "time": "10 mins"
+      "time": "10 mins",
+      "category": "dinner"
     },
     {
       "name": "Vegetable Stir Fry",
       "image": "assets/images/vegetable_stir_fry.jpeg",
-      "time": "12 mins"
+      "time": "12 mins",
+      "category": "vegan"
     },
     {
       "name": "Smoothie Bowl",
       "image": "assets/images/smoothie_bowl.jpeg",
-      "time": "6 mins"
+      "time": "6 mins",
+      "category": "desserts"
     },
     {
       "name": "Quinoa Salad",
       "image": "assets/images/quinoa_salad.jpeg",
-      "time": "15 mins"
+      "time": "15 mins",
+      "category": "vegan"
     },
     {
       "name": "Egg White Omelette",
       "image": "assets/images/egg_white_omelette.jpeg",
-      "time": "10 mins"
+      "time": "10 mins",
+      "category": "quickMeals"
     },
     {
       "name": "Hummus and Veggie Sticks",
       "image": "assets/images/hummus_and_veggies.jpeg",
-      "time": "5 mins"
+      "time": "5 mins",
+      "category": "vegan"
     },
     {
       "name": "Chickpea Salad",
       "image": "assets/images/chickpea_salad.jpeg",
-      "time": "10 mins"
+      "time": "10 mins",
+      "category": "vegan"
     },
     {
       "name": "Cottage Cheese Bowl",
       "image": "assets/images/cottage_cheese_bowl.jpeg",
-      "time": "5 mins"
+      "time": "5 mins",
+      "category": "desserts"
     },
     {
       "name": "Fruit and Nut Mix",
       "image": "assets/images/fruit_and_nut_mix.jpeg",
-      "time": "3 mins"
+      "time": "3 mins",
+      "category": "quickMeals"
     },
     {
       "name": "Grilled Veggie Sandwich",
       "image": "assets/images/grilled_veggie_sandwich.jpeg",
-      "time": "12 mins"
+      "time": "12 mins",
+      "category": "vegan"
     },
     {
       "name": "Spinach Smoothie",
       "image": "assets/images/spinach_smoothie.jpeg",
-      "time": "5 mins"
+      "time": "5 mins",
+      "category": "quickMeals"
     },
     {
       "name": "Banana Pancakes",
       "image": "assets/images/banana_pancakes.jpeg",
-      "time": "10 mins"
+      "time": "10 mins",
+      "category": "desserts"
     }
   ]
 }

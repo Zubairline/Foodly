@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:foodly_backup/core/service/functions/course_service.dart';
-import 'package:foodly_backup/features/courses/models/course_model.dart';
-import 'package:foodly_backup/features/courses/widget/course_detail.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodly_backup/config/utils/routes.dart';
+import 'package:foodly_backup/features/courses/managers/courses_bloc.dart';
+import 'package:foodly_backup/features/courses/managers/courses_event.dart';
+import 'package:foodly_backup/features/courses/managers/courses_state.dart';
 
 class CoursesScreen extends StatefulWidget {
   const CoursesScreen({super.key});
@@ -11,12 +13,10 @@ class CoursesScreen extends StatefulWidget {
 }
 
 class _CoursesScreenState extends State<CoursesScreen> {
-  late Future<List<Course>> _coursesFuture;
-
   @override
   void initState() {
     super.initState();
-    _coursesFuture = CourseService.loadCourses();
+    context.read<CoursesBloc>().add(LoadCoursesEvent());
   }
 
   Widget _buildStarRating(double rating) {
@@ -34,19 +34,16 @@ class _CoursesScreenState extends State<CoursesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Course>>(
-      future: _coursesFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+    return BlocBuilder<CoursesBloc, CoursesState>(
+      builder: (context, state) {
+        if (state is CoursesLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No courses available'));
-        } else {
-          final courses = snapshot.data!;
+        } else if (state is CoursesError) {
+          return Center(child: Text(state.message));
+        } else if (state is CoursesLoaded) {
+          final courses = state.courses;
           return ListView.builder(
-            padding: EdgeInsets.only(top: 16),
+            padding: const EdgeInsets.only(top: 16),
             itemCount: courses.length,
             itemBuilder: (context, index) {
               final course = courses[index];
@@ -64,12 +61,10 @@ class _CoursesScreenState extends State<CoursesScreen> {
                   ),
                   trailing: const Icon(Icons.arrow_forward),
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushNamed(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            CourseDetailScreen(course: course),
-                      ),
+                      RouteGenerator.courseContent,
+                      arguments: course.id,
                     );
                   },
                 ),
@@ -77,6 +72,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
             },
           );
         }
+        return const SizedBox.shrink();
       },
     );
   }

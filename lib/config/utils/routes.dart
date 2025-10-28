@@ -8,7 +8,13 @@ import 'package:foodly_backup/features/auth/sign_in/managers/sign_in_bloc.dart';
 import 'package:foodly_backup/features/auth/sign_in/screen/sign_in.dart';
 import 'package:foodly_backup/features/auth/sign_up/managers/sign_up_bloc.dart';
 import 'package:foodly_backup/features/auth/sign_up/screen/signup.dart';
+import 'package:foodly_backup/features/course_detail/managers/course_details_bloc.dart';
+import 'package:foodly_backup/features/course_detail/screen/course_detail.dart';
+import 'package:foodly_backup/features/discovery/managers/discovery_bloc.dart';
+import 'package:foodly_backup/features/discovery/screen/discovery.dart';
 import 'package:foodly_backup/features/profile/screens/profile.dart';
+import 'package:foodly_backup/features/recipes/managers/recipe_bloc.dart';
+import 'package:foodly_backup/features/recipes/screen/recipe_detail.dart';
 
 class RouteGenerator {
   static const String profile = '/profile';
@@ -22,6 +28,8 @@ class RouteGenerator {
   static const String forgotPassword = '/forgotPassword';
   static const String onboarding = '/onboarding';
   static const String initialRoute = '/initialRoute';
+  static const String recipeDetail = '/recipeDetail';
+  static const String courseContent = '/courseContent';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -52,6 +60,30 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => Profile());
       case initialRoute:
         return MaterialPageRoute(builder: (context) => CustomNavBar());
+      case discovery:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => DiscoveryBloc(),
+            child: Discovery(),
+          ),
+        );
+      case recipeDetail:
+        final recipeName = args as String;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => RecipeDetailBloc(),
+            child: RecipeDetailScreen(recipeName: recipeName),
+          ),
+        );
+      case courseContent:
+        final course = args as int;
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => CourseDetailBloc(),
+            child: CourseDetailScreen(courseId: course,),
+          ),
+        );
+
       default:
         return _errorRoute();
     }

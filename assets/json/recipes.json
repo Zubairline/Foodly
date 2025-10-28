@@ -1,0 +1,702 @@
+{
+  "popularFoods": [
+    {
+      "name": "Grilled Chicken Salad",
+      "image": "assets/images/grilled_chicken_salad.jpeg",
+      "time": "15 mins",
+      "category": "dinner",
+      "ingredients": [
+        "1 chicken breast (grilled and sliced)",
+        "2 cups mixed greens",
+        "1/2 cup cherry tomatoes",
+        "1/4 cup cucumber slices",
+        "2 tablespoons olive oil",
+        "1 tablespoon lemon juice",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "Grill the chicken breast until fully cooked and slice it.",
+        "In a bowl, combine greens, tomatoes, and cucumber.",
+        "Drizzle olive oil and lemon juice, then season with salt and pepper.",
+        "Top with grilled chicken slices and serve fresh."
+      ],
+      "nutrition": {
+        "calories": 320,
+        "fat": 18,
+        "carbohydrates": 8,
+        "protein": 32
+      }
+    },
+    {
+      "name": "Vegan Bowl",
+      "image": "assets/images/salad_bowl.jpeg",
+      "time": "10 mins",
+      "category": "vegan",
+      "ingredients": [
+        "1/2 cup quinoa (cooked)",
+        "1/2 cup chickpeas",
+        "1/4 cup shredded carrots",
+        "1/4 avocado (sliced)",
+        "1 tablespoon tahini dressing"
+      ],
+      "instructions": [
+        "In a bowl, layer quinoa, chickpeas, carrots, and avocado.",
+        "Drizzle tahini dressing on top and serve immediately."
+      ],
+      "nutrition": {
+        "calories": 290,
+        "fat": 10,
+        "carbohydrates": 36,
+        "protein": 10
+      }
+    },
+    {
+      "name": "Pasta Alfredo",
+      "image": "assets/images/pasta_alfredo.jpeg",
+      "time": "25 mins",
+      "category": "dinner",
+      "ingredients": [
+        "200g fettuccine pasta",
+        "1 tablespoon butter",
+        "1/2 cup heavy cream",
+        "1/4 cup grated parmesan cheese",
+        "1 garlic clove (minced)",
+        "Salt and black pepper"
+      ],
+      "instructions": [
+        "Cook pasta according to package instructions.",
+        "In a pan, melt butter and sauté garlic.",
+        "Add cream, simmer for 2 minutes, and mix in parmesan.",
+        "Add cooked pasta, toss well, and season with salt and pepper."
+      ],
+      "nutrition": {
+        "calories": 520,
+        "fat": 28,
+        "carbohydrates": 52,
+        "protein": 14
+      }
+    },
+    {
+      "name": "Beef Burger",
+      "image": "assets/images/beef_burger.jpg",
+      "time": "20 mins",
+      "category": "dinner",
+      "ingredients": [
+        "1 beef patty",
+        "1 burger bun",
+        "1 slice cheddar cheese",
+        "Lettuce, tomato, onion",
+        "Ketchup and mayo"
+      ],
+      "instructions": [
+        "Grill or pan-fry the beef patty for 3–4 minutes on each side.",
+        "Toast the bun and layer lettuce, tomato, patty, cheese, and sauce.",
+        "Serve hot with fries."
+      ],
+      "nutrition": {
+        "calories": 480,
+        "fat": 25,
+        "carbohydrates": 35,
+        "protein": 28
+      }
+    },
+    {
+      "name": "Chicken Fried Rice",
+      "image": "assets/images/chicken_fried_rice.jpg",
+      "time": "30 mins",
+      "category": "dinner",
+      "ingredients": [
+        "1 cup cooked rice",
+        "1/2 cup diced chicken breast",
+        "1/4 cup peas and carrots",
+        "1 egg (beaten)",
+        "2 tablespoons soy sauce",
+        "1 tablespoon oil"
+      ],
+      "instructions": [
+        "Heat oil in a pan, cook chicken until golden.",
+        "Add peas and carrots, then stir in rice.",
+        "Push rice aside, scramble egg, and mix all together.",
+        "Add soy sauce and toss for 2 minutes."
+      ],
+      "nutrition": {
+        "calories": 420,
+        "fat": 12,
+        "carbohydrates": 52,
+        "protein": 24
+      }
+    },
+    {
+      "name": "Chicken Caesar Wrap",
+      "image": "assets/images/chicken_caesar_wrap.jpg",
+      "time": "12 mins",
+      "category": "quickMeals",
+      "ingredients": [
+        "1 tortilla wrap",
+        "1/2 grilled chicken breast",
+        "2 tablespoons Caesar dressing",
+        "Lettuce and parmesan cheese"
+      ],
+      "instructions": [
+        "Layer lettuce, chicken, and cheese on a tortilla.",
+        "Drizzle dressing and wrap tightly.",
+        "Slice in half and serve."
+      ],
+      "nutrition": {
+        "calories": 340,
+        "fat": 16,
+        "carbohydrates": 28,
+        "protein": 22
+      }
+    },
+    {
+      "name": "Margherita Pizza",
+      "image": "assets/images/margherita_pizza.jpg",
+      "time": "25 mins",
+      "category": "dinner",
+      "ingredients": [
+        "1 pizza base",
+        "1/2 cup tomato sauce",
+        "1/2 cup mozzarella cheese",
+        "Fresh basil leaves",
+        "1 tablespoon olive oil"
+      ],
+      "instructions": [
+        "Spread tomato sauce on pizza base.",
+        "Top with mozzarella and basil.",
+        "Drizzle olive oil and bake at 200°C for 10–12 minutes."
+      ],
+      "nutrition": {
+        "calories": 380,
+        "fat": 15,
+        "carbohydrates": 45,
+        "protein": 14
+      }
+    },
+    {
+      "name": "Shrimp Tacos",
+      "image": "assets/images/shrimp_tacos.jpg",
+      "time": "20 mins",
+      "category": "dinner",
+      "ingredients": [
+        "6 shrimp (peeled and deveined)",
+        "2 small tortillas",
+        "1/4 cup shredded cabbage",
+        "2 tablespoons sour cream",
+        "1 teaspoon chili powder",
+        "Lime wedge for garnish"
+      ],
+      "instructions": [
+        "Season shrimp with chili powder and sauté for 4 minutes.",
+        "Warm tortillas and fill with shrimp and cabbage.",
+        "Top with sour cream and squeeze lime before serving."
+      ],
+      "nutrition": {
+        "calories": 300,
+        "fat": 10,
+        "carbohydrates": 32,
+        "protein": 18
+      }
+    },
+    {
+      "name": "Steak with Veggies",
+      "image": "assets/images/steak_with_veggies.png",
+      "time": "35 mins",
+      "category": "dinner",
+      "ingredients": [
+        "200g beef steak",
+        "1 tablespoon butter",
+        "1 cup mixed vegetables (broccoli, carrots, beans)",
+        "Salt, pepper, and garlic powder"
+      ],
+      "instructions": [
+        "Season steak and sear in butter for 3–4 minutes per side.",
+        "Steam vegetables until tender.",
+        "Serve steak with veggies on the side."
+      ],
+      "nutrition": {
+        "calories": 480,
+        "fat": 28,
+        "carbohydrates": 10,
+        "protein": 42
+      }
+    },
+    {
+      "name": "Pancakes",
+      "image": "assets/images/pancakes.png",
+      "time": "15 mins",
+      "category": "desserts",
+      "ingredients": [
+        "1 cup flour",
+        "1 tablespoon sugar",
+        "1 egg",
+        "3/4 cup milk",
+        "1 tablespoon butter (melted)"
+      ],
+      "instructions": [
+        "Mix flour, sugar, egg, and milk until smooth.",
+        "Pour batter into a heated pan and cook each side for 2 minutes.",
+        "Top with butter or syrup."
+      ],
+      "nutrition": {
+        "calories": 300,
+        "fat": 10,
+        "carbohydrates": 42,
+        "protein": 8
+      }
+    },
+    {
+      "name": "Sushi Roll",
+      "image": "assets/images/sushi_roll.png",
+      "time": "40 mins",
+      "category": "dinner",
+      "ingredients": [
+        "1 cup sushi rice (cooked)",
+        "1 nori sheet",
+        "1/2 avocado (sliced)",
+        "1/2 cucumber (cut into strips)",
+        "1 tablespoon rice vinegar"
+      ],
+      "instructions": [
+        "Season rice with rice vinegar.",
+        "Place rice on nori, layer avocado and cucumber.",
+        "Roll tightly and slice into pieces.",
+        "Serve with soy sauce."
+      ],
+      "nutrition": {
+        "calories": 330,
+        "fat": 6,
+        "carbohydrates": 58,
+        "protein": 8
+      }
+    },
+    {
+      "name": "Tomato Soup",
+      "image": "assets/images/tomato_soup.jpg",
+      "time": "18 mins",
+      "category": "vegan",
+      "ingredients": [
+        "4 ripe tomatoes (chopped)",
+        "1/2 onion (chopped)",
+        "1 garlic clove",
+        "1 tablespoon olive oil",
+        "1 cup vegetable broth"
+      ],
+      "instructions": [
+        "Sauté onion and garlic in olive oil.",
+        "Add tomatoes and cook for 10 minutes.",
+        "Pour in broth and simmer for 5 minutes.",
+        "Blend until smooth and serve warm."
+      ],
+      "nutrition": {
+        "calories": 180,
+        "fat": 6,
+        "carbohydrates": 26,
+        "protein": 4
+      }
+    },
+    {
+      "name": "Caesar Salad",
+      "image": "assets/images/caesar_salad.png",
+      "time": "12 mins",
+      "category": "vegan",
+      "ingredients": [
+        "2 cups romaine lettuce",
+        "1/4 cup croutons",
+        "2 tablespoons Caesar dressing",
+        "2 tablespoons grated parmesan"
+      ],
+      "instructions": [
+        "Combine lettuce, croutons, and parmesan in a bowl.",
+        "Toss with dressing until coated.",
+        "Serve immediately."
+      ],
+      "nutrition": {
+        "calories": 220,
+        "fat": 12,
+        "carbohydrates": 14,
+        "protein": 8
+      }
+    },
+    {
+      "name": "Grilled Salmon",
+      "image": "assets/images/grilled_salmon.jpg",
+      "time": "22 mins",
+      "category": "dinner",
+      "ingredients": [
+        "1 salmon fillet",
+        "1 tablespoon olive oil",
+        "Salt, pepper, and lemon juice",
+        "1/2 cup steamed broccoli (optional side)"
+      ],
+      "instructions": [
+        "Rub salmon with oil, salt, and pepper.",
+        "Grill for 4–5 minutes per side.",
+        "Squeeze lemon juice and serve with broccoli."
+      ],
+      "nutrition": {
+        "calories": 390,
+        "fat": 24,
+        "carbohydrates": 4,
+        "protein": 38
+      }
+    }
+  ],
+  "quickHealthyFoods": [
+    {
+      "name": "Avocado Toast",
+      "image": "assets/images/avocado_toast.jpeg",
+      "time": "5 min",
+      "category": "quickMeals",
+      "ingredients": [
+        "2 slices of whole-grain bread",
+        "1 ripe avocado",
+        "Salt and pepper to taste",
+        "Lemon juice (optional)",
+        "Chili flakes (optional)"
+      ],
+      "instructions": [
+        "Toast the bread slices until golden.",
+        "Mash the avocado with a fork, adding salt, pepper, and lemon juice.",
+        "Spread the avocado on the toast and top with chili flakes.",
+        "Serve immediately."
+      ],
+      "nutrition": {
+        "calories": 250,
+        "fat": 15,
+        "carbohydrates": 20,
+        "protein": 6
+      }
+    },
+    {
+      "name": "Smoothie",
+      "image": "assets/images/smoothies.jpeg",
+      "time": "3 min",
+      "category": "quickMeals",
+      "ingredients": [
+        "1 banana",
+        "1/2 cup strawberries",
+        "1/2 cup yogurt or almond milk",
+        "1 tablespoon honey",
+        "A few ice cubes"
+      ],
+      "instructions": [
+        "Combine all ingredients in a blender.",
+        "Blend until smooth.",
+        "Pour into a glass and enjoy chilled."
+      ],
+      "nutrition": {
+        "calories": 180,
+        "fat": 2,
+        "carbohydrates": 38,
+        "protein": 4
+      }
+    },
+    {
+      "name": "Omelette",
+      "image": "assets/images/omelettes.jpeg",
+      "time": "7 min",
+      "category": "quickMeals",
+      "ingredients": [
+        "2 eggs",
+        "2 tablespoons milk",
+        "1 tablespoon butter",
+        "Salt and pepper to taste",
+        "Optional fillings: onions, bell peppers, cheese"
+      ],
+      "instructions": [
+        "Beat eggs with milk, salt, and pepper.",
+        "Heat butter in a pan over medium heat.",
+        "Pour in egg mixture and cook for 2–3 minutes.",
+        "Add fillings, fold in half, and serve hot."
+      ],
+      "nutrition": {
+        "calories": 210,
+        "fat": 15,
+        "carbohydrates": 1,
+        "protein": 16
+      }
+    },
+    {
+      "name": "Tuna Salad Wrap",
+      "image": "assets/images/tuna_salad_wrap.jpeg",
+      "time": "10 mins",
+      "category": "dinner",
+      "ingredients": [
+        "1 can of tuna (drained)",
+        "2 tablespoons mayo or Greek yogurt",
+        "1 lettuce leaf",
+        "1 tortilla wrap",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "Mix tuna with mayo, salt, and pepper.",
+        "Lay lettuce on a tortilla and spoon tuna mixture on top.",
+        "Wrap tightly and slice in half before serving."
+      ],
+      "nutrition": {
+        "calories": 280,
+        "fat": 9,
+        "carbohydrates": 25,
+        "protein": 25
+      }
+    },
+    {
+      "name": "Vegetable Stir Fry",
+      "image": "assets/images/vegetable_stir_fry.jpeg",
+      "time": "12 mins",
+      "category": "vegan",
+      "ingredients": [
+        "1 cup mixed vegetables (bell peppers, broccoli, carrots)",
+        "1 tablespoon olive oil",
+        "1 tablespoon soy sauce",
+        "1 teaspoon garlic (minced)",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "Heat oil in a skillet and add garlic.",
+        "Add vegetables and stir-fry for 5–7 minutes.",
+        "Add soy sauce, toss, and cook for another 2 minutes.",
+        "Serve hot with rice or noodles."
+      ],
+      "nutrition": {
+        "calories": 150,
+        "fat": 6,
+        "carbohydrates": 20,
+        "protein": 5
+      }
+    },
+    {
+      "name": "Smoothie Bowl",
+      "image": "assets/images/smoothie_bowl.jpeg",
+      "time": "6 mins",
+      "category": "desserts",
+      "ingredients": [
+        "1 banana",
+        "1/2 cup frozen berries",
+        "1/2 cup yogurt",
+        "Granola and fruit toppings"
+      ],
+      "instructions": [
+        "Blend banana, berries, and yogurt until thick.",
+        "Pour into a bowl and top with granola and fruits.",
+        "Enjoy immediately."
+      ],
+      "nutrition": {
+        "calories": 230,
+        "fat": 4,
+        "carbohydrates": 45,
+        "protein": 6
+      }
+    },
+    {
+      "name": "Quinoa Salad",
+      "image": "assets/images/quinoa_salad.jpeg",
+      "time": "15 mins",
+      "category": "vegan",
+      "ingredients": [
+        "1 cup cooked quinoa",
+        "1/2 cucumber (chopped)",
+        "1 tomato (chopped)",
+        "1 tablespoon olive oil",
+        "Salt, pepper, and lemon juice"
+      ],
+      "instructions": [
+        "Mix all ingredients in a bowl.",
+        "Drizzle with olive oil and lemon juice.",
+        "Toss well and serve chilled."
+      ],
+      "nutrition": {
+        "calories": 200,
+        "fat": 6,
+        "carbohydrates": 30,
+        "protein": 8
+      }
+    },
+    {
+      "name": "Egg White Omelette",
+      "image": "assets/images/egg_white_omelette.jpeg",
+      "time": "10 mins",
+      "category": "quickMeals",
+      "ingredients": [
+        "3 egg whites",
+        "1 tablespoon olive oil",
+        "Chopped spinach and tomatoes",
+        "Salt and pepper to taste"
+      ],
+      "instructions": [
+        "Whisk egg whites and season.",
+        "Heat oil in a pan and pour in the eggs.",
+        "Add vegetables and cook until set.",
+        "Fold and serve warm."
+      ],
+      "nutrition": {
+        "calories": 120,
+        "fat": 4,
+        "carbohydrates": 2,
+        "protein": 18
+      }
+    },
+    {
+      "name": "Hummus and Veggie Sticks",
+      "image": "assets/images/hummus_and_veggies.jpeg",
+      "time": "5 mins",
+      "category": "vegan",
+      "ingredients": [
+        "1/2 cup hummus",
+        "Carrot sticks",
+        "Cucumber sticks",
+        "Celery sticks"
+      ],
+      "instructions": [
+        "Arrange veggie sticks on a plate.",
+        "Serve with hummus for dipping."
+      ],
+      "nutrition": {
+        "calories": 180,
+        "fat": 10,
+        "carbohydrates": 18,
+        "protein": 5
+      }
+    },
+    {
+      "name": "Chickpea Salad",
+      "image": "assets/images/chickpea_salad.jpeg",
+      "time": "10 mins",
+      "category": "vegan",
+      "ingredients": [
+        "1 cup cooked chickpeas",
+        "1/4 cup diced cucumber",
+        "1/4 cup chopped tomatoes",
+        "1 tablespoon olive oil",
+        "Lemon juice and salt"
+      ],
+      "instructions": [
+        "Combine chickpeas and vegetables.",
+        "Add olive oil and lemon juice.",
+        "Mix well and serve."
+      ],
+      "nutrition": {
+        "calories": 220,
+        "fat": 7,
+        "carbohydrates": 30,
+        "protein": 8
+      }
+    },
+    {
+      "name": "Cottage Cheese Bowl",
+      "image": "assets/images/cottage_cheese_bowl.jpeg",
+      "time": "5 mins",
+      "category": "desserts",
+      "ingredients": [
+        "1/2 cup cottage cheese",
+        "1/4 cup fresh fruit",
+        "1 tablespoon honey",
+        "Chopped nuts"
+      ],
+      "instructions": [
+        "Scoop cottage cheese into a bowl.",
+        "Top with fruits, nuts, and drizzle of honey.",
+        "Serve chilled."
+      ],
+      "nutrition": {
+        "calories": 190,
+        "fat": 6,
+        "carbohydrates": 18,
+        "protein": 16
+      }
+    },
+    {
+      "name": "Fruit and Nut Mix",
+      "image": "assets/images/fruit_and_nut_mix.jpeg",
+      "time": "3 mins",
+      "category": "quickMeals",
+      "ingredients": [
+        "1/4 cup almonds",
+        "1/4 cup cashews",
+        "1/4 cup raisins",
+        "1/4 cup dried cranberries"
+      ],
+      "instructions": [
+        "Mix all ingredients in a bowl.",
+        "Store in an airtight container.",
+        "Enjoy as a quick snack."
+      ],
+      "nutrition": {
+        "calories": 300,
+        "fat": 20,
+        "carbohydrates": 24,
+        "protein": 8
+      }
+    },
+    {
+      "name": "Grilled Veggie Sandwich",
+      "image": "assets/images/grilled_veggie_sandwich.jpeg",
+      "time": "12 mins",
+      "category": "vegan",
+      "ingredients": [
+        "2 slices of bread",
+        "Grilled bell peppers and zucchini",
+        "1 tablespoon hummus",
+        "Lettuce leaves"
+      ],
+      "instructions": [
+        "Spread hummus on bread.",
+        "Add grilled vegetables and lettuce.",
+        "Grill sandwich for 2–3 minutes until golden."
+      ],
+      "nutrition": {
+        "calories": 250,
+        "fat": 9,
+        "carbohydrates": 32,
+        "protein": 8
+      }
+    },
+    {
+      "name": "Spinach Smoothie",
+      "image": "assets/images/spinach_smoothie.jpeg",
+      "time": "5 mins",
+      "category": "quickMeals",
+      "ingredients": [
+        "1 cup spinach",
+        "1 banana",
+        "1/2 cup yogurt",
+        "1/2 cup almond milk"
+      ],
+      "instructions": [
+        "Blend all ingredients until smooth.",
+        "Serve cold."
+      ],
+      "nutrition": {
+        "calories": 160,
+        "fat": 3,
+        "carbohydrates": 28,
+        "protein": 6
+      }
+    },
+    {
+      "name": "Banana Pancakes",
+      "image": "assets/images/banana_pancakes.jpeg",
+      "time": "10 mins",
+      "category": "desserts",
+      "ingredients": [
+        "1 banana",
+        "2 eggs",
+        "1/4 teaspoon cinnamon",
+        "Butter for cooking"
+      ],
+      "instructions": [
+        "Mash banana and mix with eggs and cinnamon.",
+        "Heat butter and pour small circles of batter.",
+        "Cook each side for 2 minutes until golden."
+      ],
+      "nutrition": {
+        "calories": 220,
+        "fat": 8,
+        "carbohydrates": 26,
+        "protein": 10
+      }
+    }
+  ]
+}
+

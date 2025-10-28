@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodly_backup/config/utils/routes.dart';
 import 'package:foodly_backup/config/widgets/input_field.dart';
-import 'package:foodly_backup/core/helper.dart';
+import 'package:foodly_backup/core/helper/helper.dart';
 import 'package:foodly_backup/features/auth/sign_up/managers/sign_up_bloc.dart';
 import 'package:foodly_backup/features/auth/sign_up/managers/sign_up_event.dart';
 import 'package:foodly_backup/features/auth/sign_up/managers/sign_up_state.dart';
@@ -164,6 +164,7 @@ class _SignUpState extends State<SignUp> {
                               } else if (!Helper().validatePassword(value)) {
                                 return 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character';
                               }
+                              return null;
                             },
                           ),
                           15.height,

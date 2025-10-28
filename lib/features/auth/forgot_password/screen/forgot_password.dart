@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodly_backup/config/utils/colors.dart';
 import 'package:foodly_backup/config/widgets/input_field.dart';
-import 'package:foodly_backup/core/helper.dart';
+import 'package:foodly_backup/core/helper/helper.dart';
 import 'package:foodly_backup/features/auth/forgot_password/managers/forgot_password_bloc.dart';
 import 'package:foodly_backup/features/auth/forgot_password/managers/forgot_password_state.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -100,9 +101,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
       listener: (BuildContext context, state) {
         if (state is SuccessState) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
+         toast(state.message);
         }
         if (state is ErrorState) {
           ScaffoldMessenger.of(
