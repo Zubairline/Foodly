@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'login.dart';
+import 'settings.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String userEmail;
@@ -160,7 +161,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 icon: Icons.settings,
                 title: 'Settings',
                 color: Color(0xFFEB7A50),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          SettingsScreen(userEmail: widget.userEmail),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 12),
               _OptionTile(
