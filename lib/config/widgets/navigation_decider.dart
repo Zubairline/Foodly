@@ -28,7 +28,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
     BlocProvider(create: (context) => DiscoveryBloc(), child: Discovery()),
-    BlocProvider(create: (context) => PlanBloc(), child: Plan()),
+    Plan(),
     Shop(),
     BlocProvider(create: (context) => CoursesBloc(), child: CoursesScreen()),
   ];
@@ -94,7 +94,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
         elevation: 10,
         shadowColor: Color(0xffd9d9d9),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -126,18 +126,18 @@ class _CustomNavBarState extends State<CustomNavBar> {
         children: [
           SvgPicture.asset(
             imagePath,
-            width: 40,
-            height: 40,
+            width: 32,
+            height: 32,
             colorFilter: ColorFilter.mode(
               isSelected ? selectedColor : unselectedColor,
               BlendMode.srcIn,
             ),
           ),
-          4.height,
+          2.height,
           Text(
             label,
             style: navigationBar.copyWith(
-              color: isSelected ? selectedColor : largeButtons,
+              color: isSelected ? selectedColor : unselectedColor,
             ),
           ),
         ],

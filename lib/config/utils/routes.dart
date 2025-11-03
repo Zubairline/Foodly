@@ -10,8 +10,11 @@ import 'package:foodly_backup/features/auth/sign_up/managers/sign_up_bloc.dart';
 import 'package:foodly_backup/features/auth/sign_up/screen/signup.dart';
 import 'package:foodly_backup/features/course_detail/managers/course_details_bloc.dart';
 import 'package:foodly_backup/features/course_detail/screen/course_detail.dart';
+import 'package:foodly_backup/features/courses/managers/courses_bloc.dart';
+import 'package:foodly_backup/features/courses/screen/courses.dart';
 import 'package:foodly_backup/features/discovery/managers/discovery_bloc.dart';
 import 'package:foodly_backup/features/discovery/screen/discovery.dart';
+import 'package:foodly_backup/features/plan/managers/plan_bloc.dart';
 import 'package:foodly_backup/features/profile/screens/profile.dart';
 import 'package:foodly_backup/features/recipes/managers/recipe_bloc.dart';
 import 'package:foodly_backup/features/recipes/screen/recipe_detail.dart';
@@ -59,7 +62,12 @@ class RouteGenerator {
       case profile:
         return MaterialPageRoute(builder: (context) => Profile());
       case initialRoute:
-        return MaterialPageRoute(builder: (context) => CustomNavBar());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => PlanBloc(),
+            child: CustomNavBar(),
+          ),
+        );
       case discovery:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -73,6 +81,13 @@ class RouteGenerator {
           builder: (_) => BlocProvider(
             create: (context) => RecipeDetailBloc(),
             child: RecipeDetailScreen(recipeName: recipeName),
+          ),
+        );
+      case courses:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => CoursesBloc(),
+            child: CoursesScreen(),
           ),
         );
       case courseContent:

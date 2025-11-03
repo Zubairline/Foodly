@@ -1,14 +1,84 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodly_backup/features/plan/managers/plan_bloc.dart';
 import 'package:foodly_backup/features/plan/managers/plan_event.dart';
 import 'package:foodly_backup/features/plan/managers/plan_state.dart';
 import 'package:foodly_backup/features/plan/model/meal_model.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:foodly_backup/features/plan/model/ingredient_model.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+class MealSearchDelegate extends SearchDelegate<Map<String, dynamic>?> {
+  final List<Map<String, dynamic>> meals;
+
+  MealSearchDelegate(this.meals);
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    final results = meals.where((meal) =>
+        meal['name'].toString().toLowerCase().contains(query.toLowerCase())).toList();
+
+    return ListView.builder(
+      itemCount: results.length,
+      itemBuilder: (context, index) {
+        final meal = results[index];
+        return ListTile(
+          title: Text(meal['name']),
+          subtitle: Text('Category: ${meal['category']}'),
+          onTap: () {
+            close(context, meal);
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestions = meals.where((meal) =>
+        meal['name'].toString().toLowerCase().contains(query.toLowerCase())).toList();
+
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        final meal = suggestions[index];
+        return ListTile(
+          title: Text(meal['name']),
+          subtitle: Text('Category: ${meal['category']}'),
+          onTap: () {
+            close(context, meal);
+          },
+        );
+      },
+    );
+  }
+}
 
 class Plan extends StatefulWidget {
   const Plan({super.key});
@@ -262,31 +332,35 @@ class _PlanState extends State<Plan> {
 
   // 📝 Add Meal Dialog
 
-  void _showAddMealDialog(BuildContext context, PlanBloc bloc) {
-    final nameController = TextEditingController();
-    final categoryController = TextEditingController();
+  void _showAddMealDialog(BuildContext context, PlanBloc bloc) async {
     final timeController = TextEditingController();
+    Map<String, dynamic>? selectedMeal;
 
-    XFile? selectedImage;
-    final ImagePicker picker = ImagePicker();
+    // Load existing meals
+    final String foodsResponse = await rootBundle.loadString('assets/json/foods.json');
+    final foodsData = json.decode(foodsResponse);
+    final popularFoods = List<Map<String, dynamic>>.from(foodsData['popularFoods']);
+    final quickFoods = List<Map<String, dynamic>>.from(foodsData['quickHealthyFoods']);
+    final allMeals = [...popularFoods, ...quickFoods];
 
     Future<void> pickTime() async {
       final pickedTime = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
       );
-      if (context.mounted) {
-        if (pickedTime != null) {
-          final formatted = pickedTime.format(context);
-          timeController.text = formatted;
-        }
+      if (context.mounted && pickedTime != null) {
+        final formatted = pickedTime.format(context);
+        timeController.text = formatted;
       }
     }
 
-    Future<void> pickImage() async {
-      final picked = await picker.pickImage(source: ImageSource.gallery);
-      if (picked != null) {
-        selectedImage = picked;
+    Future<void> showMealSearchDialog() async {
+      final result = await showSearch<Map<String, dynamic>?>(
+        context: context,
+        delegate: MealSearchDelegate(allMeals),
+      );
+      if (result != null) {
+        selectedMeal = result;
       }
     }
 
@@ -299,14 +373,41 @@ class _PlanState extends State<Plan> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(hintText: "Meal name"),
+                // Meal Selection
+                GestureDetector(
+                  onTap: () async {
+                    await showMealSearchDialog();
+                    setState(() {});
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade400),
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey.shade50,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            selectedMeal != null ? selectedMeal!['name'] : "Select a meal",
+                            style: TextStyle(
+                              color: selectedMeal != null ? Colors.black : Colors.grey,
+                            ),
+                          ),
+                        ),
+                        const Icon(Icons.search, color: Colors.grey),
+                      ],
+                    ),
+                  ),
                 ),
-                TextField(
-                  controller: categoryController,
-                  decoration: const InputDecoration(hintText: "Category"),
-                ),
+                if (selectedMeal != null) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    "Category: ${selectedMeal!['category']}",
+                    style: const TextStyle(fontSize: 14, color: Colors.black54),
+                  ),
+                ],
                 const SizedBox(height: 12),
 
                 // 🕒 Time Picker
@@ -318,50 +419,6 @@ class _PlanState extends State<Plan> {
                     suffixIcon: const Icon(Icons.access_time),
                   ),
                   onTap: pickTime,
-                ),
-
-                const SizedBox(height: 12),
-
-                // 🖼 Image Picker
-                GestureDetector(
-                  onTap: () async {
-                    await pickImage();
-                    setState(() {}); // refresh UI
-                  },
-                  child: Container(
-                    height: 140,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.grey.shade400),
-                      color: Colors.grey.shade100,
-                    ),
-                    child: selectedImage == null
-                        ? const Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.image_outlined,
-                                  size: 40,
-                                  color: Colors.black54,
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  "Tap to select image",
-                                  style: TextStyle(color: Colors.black54),
-                                ),
-                              ],
-                            ),
-                          )
-                        : ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.file(
-                              File(selectedImage!.path),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                  ),
                 ),
               ],
             ),
@@ -375,14 +432,36 @@ class _PlanState extends State<Plan> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepOrangeAccent,
               ),
-              onPressed: () {
-                if (selectedDay != null &&
-                    nameController.text.trim().isNotEmpty) {
+              onPressed: () async {
+                if (selectedDay != null && selectedMeal != null) {
+                  // Load ingredients from recipes.json if available
+                  List<Ingredient> ingredients = [];
+                  try {
+                    final recipesResponse = await rootBundle.loadString('assets/json/recipes.json');
+                    final recipesData = json.decode(recipesResponse);
+                    final quickRecipes = List<Map<String, dynamic>>.from(recipesData['quickHealthyFoods']);
+                    final popularRecipes = List<Map<String, dynamic>>.from(recipesData['popularFoods']);
+                    final allRecipes = [...quickRecipes, ...popularRecipes];
+
+                    final recipe = allRecipes.firstWhere(
+                      (r) => r['name'].toString().toLowerCase() == selectedMeal!['name'].toString().toLowerCase(),
+                      orElse: () => {},
+                    );
+
+                    if (recipe.isNotEmpty && recipe['ingredients'] != null) {
+                      ingredients = (recipe['ingredients'] as List<dynamic>).map((i) => Ingredient(name: i.toString(), quantity: '')).toList();
+                    }
+                  } catch (e) {
+                    // If recipes.json fails to load or meal not found, use empty ingredients
+                    ingredients = [];
+                  }
+
                   final meal = Meal(
-                    name: nameController.text.trim(),
-                    category: categoryController.text.trim(),
+                    name: selectedMeal!['name'],
+                    category: selectedMeal!['category'],
                     time: timeController.text.trim(),
-                    image: selectedImage?.path ?? '',
+                    image: selectedMeal!['image'] ?? '',
+                    ingredients: ingredients,
                   );
 
                   // Add to HydratedBloc
