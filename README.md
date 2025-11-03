@@ -1,8 +1,7 @@
-🍽️ FOODLY
+# FOODLY – Your Personal Meal Planning & Recipe Finder App
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)](https://flutter.dev/)
-[![Firebase](https://img.shields.io/badge/Firebase-Cloud-FFCA28?logo=firebase)](https://firebase.google.com/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+FOODLY is a cross-platform Flutter app designed to help users discover, plan, and organize their meals effortlessly. The app enables users to explore meal ideas, view detailed recipes, create personalized meal plans and access tailored shopping list — all in one place.
+
 
 FOODLY is a modern cross-platform Flutter application that serves as your personal meal planning assistant and recipe discovery platform. It helps users discover, plan, and organize their meals effortlessly while providing access to educational cooking and nutrition courses.
 
@@ -114,6 +113,12 @@ lib/
 │   └── courses/     # Educational content
 └── foodly.dart      # App entry point
 ```
+
+### Demo Video Walkthrough
+
+A short 2–3 minute screen recording demonstrating the updated app flow (Login → Home → Courses → Meal Planning → Details).
+
+**Watch the demo:** [https://drive.google.com/your-video-link](https://drive.google.com/file/d/1ZKkZomZFOkujC87W5EK4SFe7wF4oyiVW/view?usp=drive_link)
 
 ## 🤝 Contributing
 
