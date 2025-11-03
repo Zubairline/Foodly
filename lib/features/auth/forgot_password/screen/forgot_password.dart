@@ -45,7 +45,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   Form(
                     key: formKey,
                     child: InputField(
-                      hintText: 'Email',
+                      label: 'Email',
                       prefixIcon: Icon(Icons.email_outlined),
                       controller: emailController,
                       filled: false,

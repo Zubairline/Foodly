@@ -389,6 +389,7 @@ class _PlanState extends State<Plan> {
                   bloc.add(AddMealToPlan(date: selectedDay!, meal: meal));
                 }
                 Navigator.pop(context);
+                toast('Meal added successfully!');
               },
               child: const Text("Add"),
             ),
