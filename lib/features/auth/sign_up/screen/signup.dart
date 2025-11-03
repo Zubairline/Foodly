@@ -108,7 +108,7 @@ class _SignUpState extends State<SignUp> {
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none,
                             ),
-                            hintText: 'Full Name',
+                            label: 'Full Name',
                           ),
 
                           const SizedBox(height: 15),
@@ -122,7 +122,7 @@ class _SignUpState extends State<SignUp> {
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none,
                             ),
-                            hintText: 'Email',
+                            label: 'Email',
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your email address';
@@ -141,7 +141,7 @@ class _SignUpState extends State<SignUp> {
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none,
                             ),
-                            hintText: 'Password',
+                            label: 'Password',
                             obscureText: !isPasswordVisible,
                             suffixIcon: IconButton(
                               icon: Icon(
@@ -178,7 +178,7 @@ class _SignUpState extends State<SignUp> {
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none,
                             ),
-                            hintText: 'Confirm Password',
+                            label: 'Confirm Password',
                             obscureText: !isPasswordVisible,
                             suffixIcon: IconButton(
                               onPressed: () {

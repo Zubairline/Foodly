@@ -74,13 +74,12 @@ class _CustomNavBarState extends State<CustomNavBar> {
           ),
           IconButton(
             onPressed: () {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text("See you soon!")));
+              auth.signOut();
               Navigator.restorablePushReplacementNamed(
                 context,
                 RouteGenerator.signIn,
               );
+              toast('Logged out successfully');
             },
             icon: SvgPicture.asset(logout, width: 22, height: 22),
           ),
