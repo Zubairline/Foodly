@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'screens/login.dart';
 import 'screens/signup.dart';
 import 'screens/profile.dart';
 import 'screens/forgot_password_page.dart';
 import 'l10n/app_localizations.dart';
-import 'providers/language_provider.dart';
+import 'blocs/language_bloc.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => LanguageProvider(),
-      child: const FoodlyApp(),
-    ),
+    BlocProvider(create: (context) => LanguageBloc(), child: const FoodlyApp()),
   );
 }
 
@@ -22,8 +19,8 @@ class FoodlyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LanguageProvider>(
-      builder: (context, languageProvider, child) {
+    return BlocBuilder<LanguageBloc, LanguageState>(
+      builder: (context, state) {
         return MaterialApp(
           title: 'Foodly',
           debugShowCheckedModeBanner: false,
@@ -36,7 +33,7 @@ class FoodlyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           // Localization
-          locale: languageProvider.locale,
+          locale: state.locale,
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,

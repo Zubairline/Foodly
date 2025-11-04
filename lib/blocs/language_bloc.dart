@@ -1,31 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:language_picker/languages.dart';
 import 'package:language_picker/language_picker.dart';
 
-class LanguageProvider extends ChangeNotifier {
-  Locale _locale = const Locale('en'); // Default to English
+abstract class LanguageEvent {}
 
-  Language _selectedDropdownLanguage = Languages.english;
-  Language _selectedDialogLanguage = Languages.english;
-  Language _selectedCupertinoLanguage = Languages.english;
+class ChangeLanguage extends LanguageEvent {
+  final Language language;
 
-  Locale get locale => _locale;
+  ChangeLanguage(this.language);
+}
 
-  Language get selectedDropdownLanguage => _selectedDropdownLanguage;
-  Language get selectedDialogLanguage => _selectedDialogLanguage;
-  Language get selectedCupertinoLanguage => _selectedCupertinoLanguage;
+class LanguageState {
+  final Locale locale;
+  final Language selectedDropdownLanguage;
+  final Language selectedDialogLanguage;
+  final Language selectedCupertinoLanguage;
 
-  void setLocale(Locale locale) {
-    if (_locale != locale) {
-      _locale = locale;
-      notifyListeners();
-    }
+  LanguageState({
+    required this.locale,
+    required this.selectedDropdownLanguage,
+    required this.selectedDialogLanguage,
+    required this.selectedCupertinoLanguage,
+  });
+
+  LanguageState copyWith({
+    Locale? locale,
+    Language? selectedDropdownLanguage,
+    Language? selectedDialogLanguage,
+    Language? selectedCupertinoLanguage,
+  }) {
+    return LanguageState(
+      locale: locale ?? this.locale,
+      selectedDropdownLanguage:
+          selectedDropdownLanguage ?? this.selectedDropdownLanguage,
+      selectedDialogLanguage:
+          selectedDialogLanguage ?? this.selectedDialogLanguage,
+      selectedCupertinoLanguage:
+          selectedCupertinoLanguage ?? this.selectedCupertinoLanguage,
+    );
+  }
+}
+
+class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
+  LanguageBloc()
+    : super(
+        LanguageState(
+          locale: const Locale('en'),
+          selectedDropdownLanguage: Languages.english,
+          selectedDialogLanguage: Languages.english,
+          selectedCupertinoLanguage: Languages.english,
+        ),
+      ) {
+    on<ChangeLanguage>(_onChangeLanguage);
+  }
+
+  void _onChangeLanguage(ChangeLanguage event, Emitter<LanguageState> emit) {
+    emit(
+      state.copyWith(
+        locale: Locale(event.language.isoCode),
+        selectedDropdownLanguage: event.language,
+        selectedDialogLanguage: event.language,
+        selectedCupertinoLanguage: event.language,
+      ),
+    );
   }
 
   // Helper method to get language name
   String getLanguageName() {
-    switch (_locale.languageCode) {
+    switch (state.locale.languageCode) {
       case 'en':
         return 'English';
       case 'es':
@@ -69,11 +113,9 @@ class LanguageProvider extends ChangeNotifier {
         isSearchable: true,
         title: const Text('Select your language'),
         onValuePicked: (Language language) {
-          _selectedDialogLanguage = language;
-          setLocale(Locale(language.isoCode));
-          print(_selectedDialogLanguage.name);
-          print(_selectedDialogLanguage.isoCode);
-          notifyListeners();
+          add(ChangeLanguage(language));
+          print(language.name);
+          print(language.isoCode);
         },
         itemBuilder: buildDialogItem,
       ),
@@ -88,11 +130,9 @@ class LanguageProvider extends ChangeNotifier {
           return LanguagePickerCupertino(
             pickerSheetHeight: 200.0,
             onValuePicked: (Language language) {
-              _selectedCupertinoLanguage = language;
-              setLocale(Locale(language.isoCode));
-              print(_selectedCupertinoLanguage.name);
-              print(_selectedCupertinoLanguage.isoCode);
-              notifyListeners();
+              add(ChangeLanguage(language));
+              print(language.name);
+              print(language.isoCode);
             },
           );
         },
@@ -105,12 +145,4 @@ class LanguageProvider extends ChangeNotifier {
       Flexible(child: Text(language.name)),
     ],
   );
-
-  void onDropdownValuePicked(Language language) {
-    _selectedDropdownLanguage = language;
-    setLocale(Locale(language.isoCode));
-    print(_selectedDropdownLanguage.name);
-    print(_selectedDropdownLanguage.isoCode);
-    notifyListeners();
-  }
 }

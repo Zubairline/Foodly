@@ -3,8 +3,8 @@ import 'login.dart';
 import '../l10n/app_localizations.dart';
 import 'package:language_picker/language_picker.dart';
 import 'package:language_picker/languages.dart';
-import 'package:provider/provider.dart';
-import '../providers/language_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../blocs/language_bloc.dart';
 
 class SettingsScreen extends StatefulWidget {
   final String userEmail;
@@ -125,30 +125,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: LanguagePickerDropdown(
-                  initialValue: Languages.english,
-                  itemBuilder: (language) => Provider.of<LanguageProvider>(
-                    context,
-                    listen: false,
-                  ).buildDropdownItem(language),
-                  onValuePicked: (Language language) {
-                    setState(() {
-                      _selectedLanguage = language;
-                    });
-                    // Update the app's locale using the provider
-                    final languageProvider = Provider.of<LanguageProvider>(
-                      context,
-                      listen: false,
-                    );
-                    languageProvider.onDropdownValuePicked(language);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          AppLocalizations.of(
-                            context,
-                          )!.languageChanged(language.name),
-                        ),
-                      ),
+                child: BlocBuilder<LanguageBloc, LanguageState>(
+                  builder: (context, state) {
+                    return LanguagePickerDropdown(
+                      initialValue: state.selectedDropdownLanguage,
+                      itemBuilder: (language) => context
+                          .read<LanguageBloc>()
+                          .buildDropdownItem(language),
+                      onValuePicked: (Language language) {
+                        setState(() {
+                          _selectedLanguage = language;
+                        });
+                        // Update the app's locale using the bloc
+                        context.read<LanguageBloc>().add(
+                          ChangeLanguage(language),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              AppLocalizations.of(
+                                context,
+                              )!.languageChanged(language.name),
+                            ),
+                          ),
+                        );
+                      },
                     );
                   },
                 ),
