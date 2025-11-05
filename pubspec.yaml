@@ -49,6 +49,8 @@ dependencies:
   youtube_player_iframe: ^5.2.2
   hydrated_bloc: ^10.1.1
   path_provider: ^2.1.5
+  language_picker: ^0.4.5
+  flutter_localization: ^0.3.3
 
 dev_dependencies:
   flutter_test:

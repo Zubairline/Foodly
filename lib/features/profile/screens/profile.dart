@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodly_backup/config/utils/images.dart';
+import 'package:foodly_backup/config/utils/routes.dart';
 import 'package:foodly_backup/features/auth/sign_in/screen/sign_in.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -14,6 +17,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   File? _profileImage;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
@@ -23,6 +27,15 @@ class _ProfileState extends State<Profile> {
         _profileImage = File(pickedFile.path);
       });
     }
+  }
+
+  Future<String> _getFullName() async {
+    final prefs = await SharedPreferences.getInstance();
+    final firstName = prefs.getString('first_name') ?? '';
+    final middleName = prefs.getString('middle_name') ?? '';
+    final lastName = prefs.getString('last_name') ?? '';
+    final fullName = '$firstName $middleName $lastName';
+    return fullName;
   }
 
   @override
@@ -70,8 +83,7 @@ class _ProfileState extends State<Profile> {
                     backgroundColor: const Color(0xFFEADCD3),
                     backgroundImage: _profileImage != null
                         ? FileImage(_profileImage!)
-                        : const AssetImage(profile)
-                              as ImageProvider,
+                        : const AssetImage(profile) as ImageProvider,
                   ),
                   GestureDetector(
                     onTap: _pickImage,
@@ -93,9 +105,18 @@ class _ProfileState extends State<Profile> {
               const SizedBox(height: 15),
 
               // 👩 Name
-              const Text(
-                'Sarah Doe',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              FutureBuilder(
+                future: _getFullName(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  }
+                  final name = snapshot.data;
+                  return Text(
+                    name ?? '',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  );
+                },
               ),
               const SizedBox(height: 25),
 
@@ -133,15 +154,19 @@ class _ProfileState extends State<Profile> {
               _SectionTile(
                 icon: Icons.menu_book_rounded,
                 color: Color(0xFFEB7A50),
-                title: 'My Cookbook',
-                onTap: () {},
+                title: 'My Course',
+                onTap: () {
+                  Navigator.pushNamed(context, RouteGenerator.courses);
+                },
               ),
               const SizedBox(height: 12),
               _SectionTile(
                 icon: Icons.calendar_month_rounded,
                 color: Color(0xFFEB7A50),
                 title: 'Meal Planning History',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, RouteGenerator.plan);
+                },
               ),
               const SizedBox(height: 30),
 
@@ -159,7 +184,9 @@ class _ProfileState extends State<Profile> {
                 icon: Icons.settings,
                 title: 'Settings',
                 color: Color(0xFFEB7A50),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, RouteGenerator.setting);
+                },
               ),
               const SizedBox(height: 12),
               _OptionTile(
@@ -176,10 +203,12 @@ class _ProfileState extends State<Profile> {
                 height: 55,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    _auth.signOut();
+                    Navigator.pushReplacementNamed(
                       context,
-                      MaterialPageRoute(builder: (context) => const SignIn()),
+                      RouteGenerator.signIn,
                     );
+                    toast('Logged out successfully');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,

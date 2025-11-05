@@ -18,6 +18,7 @@ import 'package:foodly_backup/features/plan/managers/plan_bloc.dart';
 import 'package:foodly_backup/features/profile/screens/profile.dart';
 import 'package:foodly_backup/features/recipes/managers/recipe_bloc.dart';
 import 'package:foodly_backup/features/recipes/screen/recipe_detail.dart';
+import 'package:foodly_backup/features/settings/screens/settings.dart';
 
 class RouteGenerator {
   static const String profile = '/profile';
@@ -95,10 +96,14 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => CourseDetailBloc(),
-            child: CourseDetailScreen(courseId: course,),
+            child: CourseDetailScreen(courseId: course),
           ),
         );
-
+      case setting:
+        final userEmail = args as String;
+        return MaterialPageRoute(
+          builder: (context) => Settings(userEmail: userEmail),
+        );
       default:
         return _errorRoute();
     }

@@ -11,7 +11,6 @@ import 'package:foodly_backup/features/courses/managers/courses_bloc.dart';
 import 'package:foodly_backup/features/courses/screen/courses.dart';
 import 'package:foodly_backup/features/discovery/managers/discovery_bloc.dart';
 import 'package:foodly_backup/features/discovery/screen/discovery.dart';
-import 'package:foodly_backup/features/plan/managers/plan_bloc.dart';
 import 'package:foodly_backup/features/plan/screen/plan.dart';
 import 'package:foodly_backup/features/shop/screen/shop.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -47,6 +46,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final userEmail = auth.currentUser?.email;
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -69,16 +69,19 @@ class _CustomNavBarState extends State<CustomNavBar> {
         ),
         actions: [
           IconButton(
-            onPressed: () => Text("You've tapped on the settings icon"),
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                RouteGenerator.setting,
+                arguments: userEmail ?? 'emmanuelbaffoeappiahofori@gmail.com',
+              );
+            },
             icon: SvgPicture.asset(settingsSvg, width: 22, height: 22),
           ),
           IconButton(
             onPressed: () {
               auth.signOut();
-              Navigator.restorablePushReplacementNamed(
-                context,
-                RouteGenerator.signIn,
-              );
+              Navigator.pushReplacementNamed(context, RouteGenerator.signIn);
               toast('Logged out successfully');
             },
             icon: SvgPicture.asset(logout, width: 22, height: 22),

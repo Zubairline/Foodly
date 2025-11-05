@@ -22,6 +22,7 @@ class _SignUpState extends State<SignUp> {
   late final TextEditingController _passwordController;
   late final TextEditingController _confirmPasswordController;
   bool isPasswordVisible = false;
+  bool isConfirmPasswordVisible = false;
 
   @override
   void initState() {
@@ -179,15 +180,15 @@ class _SignUpState extends State<SignUp> {
                               borderSide: BorderSide.none,
                             ),
                             label: 'Confirm Password',
-                            obscureText: !isPasswordVisible,
+                            obscureText: !isConfirmPasswordVisible,
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
-                                  isPasswordVisible = !isPasswordVisible;
+                                  isConfirmPasswordVisible = !isConfirmPasswordVisible;
                                 });
                               },
                               icon: Icon(
-                                isPasswordVisible
+                                isConfirmPasswordVisible
                                     ? Icons.visibility
                                     : Icons.visibility_off,
                                 color: const Color(0xFFEB7A50),

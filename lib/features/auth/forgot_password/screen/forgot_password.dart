@@ -4,6 +4,7 @@ import 'package:foodly_backup/config/utils/colors.dart';
 import 'package:foodly_backup/config/widgets/input_field.dart';
 import 'package:foodly_backup/core/helper/helper.dart';
 import 'package:foodly_backup/features/auth/forgot_password/managers/forgot_password_bloc.dart';
+import 'package:foodly_backup/features/auth/forgot_password/managers/forgot_password_event.dart';
 import 'package:foodly_backup/features/auth/forgot_password/managers/forgot_password_state.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -71,11 +72,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           setState(() {
                             _isLoading = true;
                           });
-                          Future.delayed(const Duration(seconds: 2), () {});
+                          context.read<ForgotPasswordBloc>().add(
+                            ResetPassword(emailController.text.trim()),
+                          );
                         }
                       },
                       child: _isLoading
-                          ? const CircularProgressIndicator()
+                          ? const CircularProgressIndicator(color: Colors.white)
                           : const Text(
                               "Reset Password",
                               style: TextStyle(color: Colors.white),
@@ -101,7 +104,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
       listener: (BuildContext context, state) {
         if (state is SuccessState) {
-         toast(state.message);
+          Navigator.pop(context);
+          toast(state.message);
         }
         if (state is ErrorState) {
           ScaffoldMessenger.of(
