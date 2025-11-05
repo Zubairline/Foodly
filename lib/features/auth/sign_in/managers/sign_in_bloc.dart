@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodly_backup/features/auth/sign_in/managers/sign_in_event.dart';
@@ -19,6 +20,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         email: event.email,
         password: event.password,
       );
+      if(kDebugMode) {
+        print('User Credential: $userCredential');
+      }
       emit(SuccessState(userCredential.user!.uid));
 
       final prefs = await SharedPreferences.getInstance();

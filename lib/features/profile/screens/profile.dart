@@ -154,15 +154,19 @@ class _ProfileState extends State<Profile> {
               _SectionTile(
                 icon: Icons.menu_book_rounded,
                 color: Color(0xFFEB7A50),
-                title: 'My Cookbook',
-                onTap: () {},
+                title: 'My Course',
+                onTap: () {
+                  Navigator.pushNamed(context, RouteGenerator.courses);
+                },
               ),
               const SizedBox(height: 12),
               _SectionTile(
                 icon: Icons.calendar_month_rounded,
                 color: Color(0xFFEB7A50),
                 title: 'Meal Planning History',
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, RouteGenerator.plan);
+                },
               ),
               const SizedBox(height: 30),
 
@@ -180,7 +184,9 @@ class _ProfileState extends State<Profile> {
                 icon: Icons.settings,
                 title: 'Settings',
                 color: Color(0xFFEB7A50),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, RouteGenerator.setting);
+                },
               ),
               const SizedBox(height: 12),
               _OptionTile(
