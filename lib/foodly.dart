@@ -4,7 +4,9 @@ import 'package:foodly_backup/config/utils/colors.dart';
 import 'package:foodly_backup/config/utils/routes.dart';
 
 class Foodly extends StatelessWidget {
-  const Foodly({super.key});
+  final String initialRoute;
+
+  const Foodly({super.key, required this.initialRoute});
 
   @override
   Widget build(BuildContext context) {
